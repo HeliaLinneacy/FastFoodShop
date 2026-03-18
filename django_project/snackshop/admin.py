@@ -39,7 +39,6 @@ class OrderAdmin(admin.ModelAdmin):
             return self.readonly_fields + ('user',)
         return self.readonly_fields
 
-
 # Custom OrderItem Admin
 @admin.register(OrderItem)
 class OrderItemAdmin(admin.ModelAdmin):
