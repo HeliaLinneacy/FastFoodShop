@@ -1,0 +1,78 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Quản lý người dùng - Snack Shop{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-5">
+    <div class="row mb-4">
+        <div class="col-lg-12">
+            <h1>Quản lý người dùng</h1>
+        </div>
+    </div>
+    
+    <!-- Admin Navigation -->
+    <div class="row mb-4">
+        <div class="col-lg-12">
+            <div class="btn-group w-100" role="group">
+                <a href="{% url 'shop:admin_dashboard' %}" class="btn btn-outline-primary">Dashboard</a>
+                <a href="{% url 'shop:admin_products' %}" class="btn btn-outline-primary">Sản phẩm</a>
+                <a href="{% url 'shop:admin_categories' %}" class="btn btn-outline-primary">Danh mục</a>
+                <a href="{% url 'shop:admin_orders' %}" class="btn btn-outline-primary">Đơn hàng</a>
+                <a href="{% url 'shop:admin_users' %}" class="btn btn-primary">Người dùng</a>
+                <a href="{% url 'shop:admin_statistics' %}" class="btn btn-outline-primary">Thống kê</a>
+            </div>
+        </div>
+    </div>
+    
+    {% if users %}
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Danh sách người dùng ({{ users|length }})</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Email</th>
+                            <th>Tên</th>
+                            <th>Số điện thoại</th>
+                            <th>Loại tài khoản</th>
+                            <th>Ngày tạo</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                        <tr>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.get_full_name }}</td>
+                            <td>{{ user.phone|default:"Chưa cập nhật" }}</td>
+                            <td>
+                                {% if user.is_staff %}
+                                    <span class="badge bg-danger">Admin</span>
+                                {% else %}
+                                    <span class="badge bg-primary">Người dùng</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ user.date_joined|date:"d/m/Y" }}</td>
+                            <td>
+                                <a href="/admin/snackshop/customuser/{{ user.id }}/change/" class="btn btn-sm btn-warning">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="/admin/snackshop/customuser/{{ user.id }}/delete/" class="btn btn-sm btn-danger">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% else %}
+        <div class="alert alert-info">Không có người dùng nào.</div>
+    {% endif %}
+</div>
+{% endblock %}

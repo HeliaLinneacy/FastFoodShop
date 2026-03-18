@@ -1,0 +1,270 @@
+{% extends 'base/base.html' %}
+
+{% block title %}{{ product.name }} - Snack Shop{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <!-- Product Image -->
+        <div class="col-lg-5 mb-4">
+            <img src="{{ product.image }}" alt="{{ product.name }}" class="img-fluid rounded" style="width: 100%;">
+        </div>
+        
+        <!-- Product Details -->
+        <div class="col-lg-7">
+            <h1 class="mb-3">{{ product.name }}</h1>
+            
+            <!-- Rating -->
+            <div class="mb-3">
+                <span class="text-warning me-2">
+                    <i class="fas fa-star"></i> {{ product.rating|floatformat:1 }}
+                </span>
+                <span class="text-muted">({{ product.review_count }} đánh giá)</span>
+            </div>
+            
+            <!-- Category -->
+            <p class="text-muted mb-3">
+                Danh mục: <a href="{% url 'shop:product_list' %}?category={{ product.category.id }}">{{ product.category.name }}</a>
+            </p>
+            
+            <!-- Price -->
+            <h3 class="text-primary mb-3">{{ product.price|floatformat:0 }}đ</h3>
+            
+            <!-- Description -->
+            <p class="mb-4">{{ product.description }}</p>
+            
+            <!-- Stock Status -->
+            <div class="mb-4">
+                {% if product.stock > 0 %}
+                    <span class="badge bg-success">Còn {{ product.stock }} sản phẩm</span>
+                {% else %}
+                    <span class="badge bg-danger">Hết hàng</span>
+                {% endif %}
+                <p class="text-muted mt-2">Đã bán: {{ product.sold }}</p>
+            </div>
+            
+            <!-- Add to Cart -->
+            {% if user.is_authenticated %}
+                {% if product.stock > 0 %}
+                <div class="d-flex gap-2 align-items-end">
+                    <form method="post" action="{% url 'shop:add_to_cart' product.id %}" class="m-0 p-0">
+                        {% csrf_token %}
+                        <div class="mb-0">
+                            <label for="quantity" class="form-label">Số lượng:</label>
+                            <input type="number" name="quantity" id="quantity" class="form-control" value="1" min="1" max="{{ product.stock }}" style="width: 100px;">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg mt-2">
+                            <i class="fas fa-shopping-cart"></i> Thêm vào giỏ hàng
+                        </button>
+                    </form>
+                    <form method="post" action="{% url 'shop:buy_now' product.id %}" id="buyNowForm" class="m-0 p-0">
+                        {% csrf_token %}
+                        <input type="hidden" name="quantity" id="buyNowQuantity" value="1">
+                        <button type="submit" class="btn btn-danger btn-lg mt-4">
+                            <i class="fas fa-bolt"></i> Mua Ngay
+                        </button>
+                    </form>
+                </div>
+                <script>
+                    // Đồng bộ số lượng giữa 2 form
+                    document.getElementById('quantity').addEventListener('input', function() {
+                        document.getElementById('buyNowQuantity').value = this.value;
+                    });
+                </script>
+                {% endif %}
+            {% else %}
+                <p class="alert alert-info">
+                    Vui lòng <a href="{% url 'shop:login' %}">đăng nhập</a> để mua sản phẩm.
+                </p>
+            {% endif %}
+        </div>
+    </div>
+    
+    <!-- Reviews Section -->
+    <div class="row mt-5">
+        <div class="col-lg-8">
+            <h3 class="mb-4">Đánh giá sản phẩm</h3>
+            
+            <!-- Add Review -->
+            {% if user.is_authenticated %}
+            <div class="card mb-4 border-0 shadow-sm">
+                <div class="card-header bg-primary border-0">
+                    <h5 class="mb-0 text-white">Viết đánh giá</h5>
+                </div>
+                <div class="card-body">
+                    {% if review_form %}
+                    <form method="post" id="reviewForm">
+                        {% csrf_token %}
+                        <input type="hidden" name="submit_review" value="1">
+                        <input type="hidden" id="id_rating" name="rating" value="0">
+                        
+                        {% if review_form.non_field_errors %}
+                            <div class="alert alert-danger">
+                                {{ review_form.non_field_errors }}
+                            </div>
+                        {% endif %}
+                        
+                        <div class="mb-2">
+                            <label class="form-label fw-bold small">Đánh giá</label>
+                            <div class="star-rating" style="font-size: 24px; letter-spacing: 5px;">
+                                <span class="star" data-value="1">★</span>
+                                <span class="star" data-value="2">★</span>
+                                <span class="star" data-value="3">★</span>
+                                <span class="star" data-value="4">★</span>
+                                <span class="star" data-value="5">★</span>
+                            </div>
+                            <div id="ratingError" class="alert alert-danger mt-2 small d-none"></div>
+                            {% if review_form.rating.errors %}
+                                <div class="alert alert-danger mt-2 small">{{ review_form.rating.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="mb-2">
+                            <label class="form-label fw-bold small" for="{{ review_form.comment.id_for_label }}">Nhận xét</label>
+                            {{ review_form.comment }}
+                            <small class="text-muted d-block mt-1">Tối đa 500 ký tự</small>
+                            {% if review_form.comment.errors %}
+                                <div class="alert alert-danger mt-2">{{ review_form.comment.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-sm mt-2">
+                            <i class="fas fa-paper-plane"></i> Gửi đánh giá
+                        </button>
+                    </form>
+                    {% endif %}
+                </div>
+            </div>
+            <style>
+                .star-rating {
+                    cursor: pointer;
+                    user-select: none;
+                }
+                .star {
+                    color: #ddd;
+                    transition: color 0.2s;
+                    cursor: pointer;
+                }
+                .star:hover,
+                .star.active {
+                    color: #ffc107;
+                }
+            </style>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const stars = document.querySelectorAll('.star-rating .star');
+                    const ratingInput = document.getElementById('id_rating');
+                    const ratingError = document.getElementById('ratingError');
+                    const reviewForm = document.getElementById('reviewForm');
+                    
+                    stars.forEach(star => {
+                        star.addEventListener('click', function() {
+                            const value = this.dataset.value;
+                            ratingInput.value = value;
+                            ratingError.classList.add('d-none');
+                            
+                            // Update visual
+                            stars.forEach(s => {
+                                if(s.dataset.value <= value) {
+                                    s.classList.add('active');
+                                } else {
+                                    s.classList.remove('active');
+                                }
+                            });
+                        });
+                        
+                        star.addEventListener('mouseover', function() {
+                            const value = this.dataset.value;
+                            stars.forEach(s => {
+                                if(s.dataset.value <= value) {
+                                    s.style.color = '#ffc107';
+                                } else {
+                                    s.style.color = '#ddd';
+                                }
+                            });
+                        });
+                    });
+                    
+                    // Reset on mouse leave
+                    document.querySelector('.star-rating').addEventListener('mouseleave', function() {
+                        stars.forEach(s => {
+                            if(s.classList.contains('active')) {
+                                s.style.color = '#ffc107';
+                            } else {
+                                s.style.color = '#ddd';
+                            }
+                        });
+                    });
+                    
+                    // Form validation
+                    reviewForm.addEventListener('submit', function(e) {
+                        if(ratingInput.value === '0') {
+                            e.preventDefault();
+                            ratingError.textContent = 'Vui lòng chọn số sao để đánh giá';
+                            ratingError.classList.remove('d-none');
+                        }
+                    });
+                });
+            </script>
+            {% else %}
+            <div class="alert alert-info mb-4">
+                <i class="fas fa-info-circle"></i> 
+                Vui lòng <a href="{% url 'shop:login' %}">đăng nhập</a> để viết đánh giá sản phẩm.
+            </div>
+            {% endif %}
+            
+            <!-- Reviews List -->
+            {% if reviews %}
+                {% for review in reviews %}
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div>
+                                <h6 class="mb-1">{{ review.user.get_full_name }}</h6>
+                                <small class="text-warning">
+                                    <i class="fas fa-star"></i> 
+                                    {{ review.rating }}/5
+                                </small>
+                            </div>
+                            <small class="text-muted">{{ review.created_at|date:"d/m/Y H:i" }}</small>
+                        </div>
+                        <p class="mb-0">{{ review.comment }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p class="text-muted">Chưa có đánh giá nào cho sản phẩm này.</p>
+            {% endif %}
+        </div>
+    </div>
+    
+    <!-- Related Products -->
+    {% if related_products %}
+    <div class="row mt-5">
+        <div class="col-lg-12">
+            <h3 class="mb-4">Sản phẩm liên quan</h3>
+        </div>
+        {% for related in related_products %}
+        <div class="col-md-6 col-lg-3 mb-4">
+            <div class="card product-card h-100">
+                <div class="product-image">
+                    <img src="{{ related.image }}" alt="{{ related.name }}" class="card-img-top">
+                </div>
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">{{ related.name }}</h5>
+                    <p class="card-text text-muted flex-grow-1">{{ related.description|truncatewords:10 }}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h6 class="text-primary fw-bold">{{ related.price|floatformat:0 }}đ</h6>
+                        <small class="text-warning">
+                            <i class="fas fa-star"></i> {{ related.rating|floatformat:1 }}
+                        </small>
+                    </div>
+                    <a href="{% url 'shop:product_detail' related.id %}" class="btn btn-sm btn-primary mt-3">Xem chi tiết</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,119 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Hồ sơ - Snack Shop{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-8">
+            <h1 class="mb-4">Hồ sơ của tôi</h1>
+            
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Thông tin cá nhân</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="{{ form.first_name.id_for_label }}" class="form-label">Họ:</label>
+                                {{ form.first_name }}
+                                {% if form.first_name.errors %}
+                                    <div class="text-danger">{{ form.first_name.errors }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6">
+                                <label for="{{ form.last_name.id_for_label }}" class="form-label">Tên:</label>
+                                {{ form.last_name }}
+                                {% if form.last_name.errors %}
+                                    <div class="text-danger">{{ form.last_name.errors }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="{{ form.email.id_for_label }}" class="form-label">Email:</label>
+                            {{ form.email }}
+                            {% if form.email.errors %}
+                                <div class="text-danger">{{ form.email.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="{{ form.phone.id_for_label }}" class="form-label">Số điện thoại:</label>
+                            {{ form.phone }}
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="{{ form.address.id_for_label }}" class="form-label">Địa chỉ:</label>
+                            {{ form.address }}
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="{{ form.avatar.id_for_label }}" class="form-label">Ảnh đại diện:</label>
+                            {{ form.avatar }}
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Cập nhật hồ sơ</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4">
+            <!-- User Info Card -->
+            <div class="card mb-4">
+                <div class="card-header bg-secondary text-white">
+                    <h5 class="mb-0">Thông tin tài khoản</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Tên:</strong> {{ user.get_full_name }}</p>
+                    <p><strong>Email:</strong> {{ user.email }}</p>
+                    <p><strong>Số điện thoại:</strong> {{ user.phone|default:"Chưa cập nhật" }}</p>
+                    <p><strong>Loại tài khoản:</strong> 
+                        {% if user.role == 'admin' %}
+                            <span class="badge bg-danger">Admin</span>
+                        {% else %}
+                            <span class="badge bg-primary">Người dùng</span>
+                        {% endif %}
+                    </p>
+                    <p><strong>Ngày tạo:</strong> {{ user.date_joined|date:"d/m/Y" }}</p>
+                </div>
+            </div>
+            
+            <!-- Recent Orders -->
+            {% if recent_orders %}
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">Đơn hàng gần đây</h5>
+                </div>
+                <div class="list-group list-group-flush">
+                    {% for order in recent_orders %}
+                    <a href="{% url 'shop:order_detail' order.id %}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="mb-1">#{{ order.id }}</h6>
+                            <small class="text-muted">{{ order.created_at|date:"d/m/Y" }}</small>
+                        </div>
+                        <span class="badge bg-primary">{{ order.total|floatformat:0 }}đ</span>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<style>
+    .form-control {
+        border: 1px solid #ddd;
+    }
+    
+    .form-control:focus {
+        border-color: #FF6B6B;
+        box-shadow: 0 0 0 0.2rem rgba(255, 107, 107, 0.25);
+    }
+</style>
+{% endblock %}

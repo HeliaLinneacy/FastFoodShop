@@ -1,0 +1,105 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Quản lý đơn hàng - Snack Shop{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-5">
+    <div class="row mb-4">
+        <div class="col-lg-12">
+            <h1>Quản lý đơn hàng</h1>
+        </div>
+    </div>
+    
+    <!-- Admin Navigation -->
+    <div class="row mb-4">
+        <div class="col-lg-12">
+            <div class="btn-group w-100" role="group">
+                <a href="{% url 'shop:admin_dashboard' %}" class="btn btn-outline-primary">Dashboard</a>
+                <a href="{% url 'shop:admin_products' %}" class="btn btn-outline-primary">Sản phẩm</a>
+                <a href="{% url 'shop:admin_categories' %}" class="btn btn-outline-primary">Danh mục</a>
+                <a href="{% url 'shop:admin_orders' %}" class="btn btn-primary">Đơn hàng</a>
+                <a href="{% url 'shop:admin_users' %}" class="btn btn-outline-primary">Người dùng</a>
+                <a href="{% url 'shop:admin_statistics' %}" class="btn btn-outline-primary">Thống kê</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Status Filter -->
+    <div class="row mb-4">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <form method="get" class="form-inline">
+                        <label class="me-2">Lọc theo trạng thái:</label>
+                        <select name="status" class="form-select" style="width: auto; margin-right: 10px;" onchange="this.form.submit()">
+                            <option value="">Tất cả</option>
+                            {% for value, label in status_choices %}
+                                <option value="{{ value }}">{{ label }}</option>
+                            {% endfor %}
+                        </select>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    {% if orders %}
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Danh sách đơn hàng ({{ orders|length }})</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Mã đơn</th>
+                            <th>Khách hàng</th>
+                            <th>Email</th>
+                            <th>Số tiền</th>
+                            <th>Trạng thái</th>
+                            <th>Ngày đặt</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                        <tr>
+                            <td><strong>#{{ order.id }}</strong></td>
+                            <td>{{ order.customer_name }}</td>
+                            <td>{{ order.customer_email }}</td>
+                            <td>{{ order.total|floatformat:0 }}đ</td>
+                            <td>
+                                {% if order.status == 'pending' %}
+                                    <span class="badge bg-warning">Chờ xác nhận</span>
+                                {% elif order.status == 'confirmed' %}
+                                    <span class="badge bg-info">Đã xác nhận</span>
+                                {% elif order.status == 'shipping' %}
+                                    <span class="badge bg-primary">Vận chuyển</span>
+                                {% elif order.status == 'delivered' %}
+                                    <span class="badge bg-success">Đã giao</span>
+                                {% elif order.status == 'cancelled' %}
+                                    <span class="badge bg-danger">Đã hủy</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ order.created_at|date:"d/m/Y H:i" }}</td>
+                            <td>
+                                <a href="{% url 'shop:order_detail' order.id %}" class="btn btn-sm btn-info">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a href="/admin/snackshop/order/{{ order.id }}/change/" class="btn btn-sm btn-warning">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% else %}
+        <div class="alert alert-info">Không có đơn hàng nào.</div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,175 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Chi tiết đơn hàng #{{ order.id }} - Snack Shop{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row mb-4">
+        <div class="col-lg-12">
+            <h1>Đơn hàng #{{ order.id }}</h1>
+            <p class="text-muted">Ngày đặt: {{ order.created_at|date:"d/m/Y H:i" }}</p>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-lg-8">
+            <!-- Order Status -->
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Trạng thái đơn hàng</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="text-center flex-grow-1">
+                            <div class="badge bg-{% if order.status in 'pending|confirmed|shipping|delivered' %}success{% else %}secondary{% endif %} p-2 mb-2">
+                                <i class="fas fa-check-circle"></i> Đã đặt hàng
+                            </div>
+                            <p class="small">{{ order.created_at|date:"d/m/Y" }}</p>
+                        </div>
+                        <div class="text-center flex-grow-1">
+                            <div class="badge bg-{% if order.status in 'confirmed|shipping|delivered' %}success{% else %}secondary{% endif %} p-2 mb-2">
+                                <i class="fas fa-check-circle"></i> Đã xác nhận
+                            </div>
+                        </div>
+                        <div class="text-center flex-grow-1">
+                            <div class="badge bg-{% if order.status in 'shipping|delivered' %}success{% else %}secondary{% endif %} p-2 mb-2">
+                                <i class="fas fa-truck"></i> Đang vận chuyển
+                            </div>
+                        </div>
+                        <div class="text-center flex-grow-1">
+                            <div class="badge bg-{% if order.status == 'delivered' %}success{% else %}secondary{% endif %} p-2 mb-2">
+                                <i class="fas fa-home"></i> Đã giao
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Staff Status Update Form -->
+                    {% if user.is_staff %}
+                    <hr class="my-3">
+                    <div class="staff-section bg-light p-3 rounded">
+                        <h6 class="mb-3">Cập nhật trạng thái</h6>
+                        <form method="post" class="d-flex gap-2">
+                            {% csrf_token %}
+                            <select name="status" class="form-select form-select-sm">
+                                <option value="">-- Chọn trạng thái --</option>
+                                {% for value, label in status_choices %}
+                                    <option value="{{ value }}" {% if order.status == value %}selected{% endif %}>{{ label }}</option>
+                                {% endfor %}
+                            </select>
+                            <button type="submit" class="btn btn-sm btn-success">
+                                <i class="fas fa-save"></i> Cập nhật
+                            </button>
+                        </form>
+                        <small class="text-muted d-block mt-2">
+                            <i class="fas fa-info-circle"></i> Trạng thái hiện tại: <strong>{{ order.get_status_display }}</strong>
+                        </small>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <!-- Order Items -->
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Chi tiết sản phẩm</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Sản phẩm</th>
+                                    <th>Giá</th>
+                                    <th>Số lượng</th>
+                                    <th>Tổng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in items %}
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <img src="{{ item.product_image }}" alt="{{ item.product_name }}" style="width: 50px; height: 50px; object-fit: cover; margin-right: 10px; border-radius: 5px;">
+                                            {{ item.product_name }}
+                                        </div>
+                                    </td>
+                                    <td>{{ item.price|floatformat:0 }}đ</td>
+                                    <td>{{ item.quantity }}</td>
+                                    <td>{{ item.subtotal|floatformat:0 }}đ</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Order Summary -->
+        <div class="col-lg-4">
+            <!-- Shipping Info -->
+            <div class="card mb-4">
+                <div class="card-header bg-secondary text-white">
+                    <h5 class="mb-0">Thông tin giao hàng</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Người nhận:</strong> {{ order.customer_name }}</p>
+                    <p><strong>Email:</strong> {{ order.customer_email }}</p>
+                    <p><strong>Điện thoại:</strong> {{ order.customer_phone }}</p>
+                    <p><strong>Địa chỉ:</strong> {{ order.customer_address }}</p>
+                </div>
+            </div>
+            
+            <!-- Order Total -->
+            <div class="card mb-4">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">Tóm tắt thanh toán</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Tạm tính:</span>
+                        <span>{{ order.total|floatformat:0 }}đ</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Phí vận chuyển:</span>
+                        <span>0đ</span>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between">
+                        <h5>Tổng cộng:</h5>
+                        <h5 class="text-primary">{{ order.total|floatformat:0 }}đ</h5>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Order Status -->
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">Trạng thái hiện tại</h5>
+                </div>
+                <div class="card-body text-center">
+                    {% if order.status == 'pending' %}
+                        <span class="badge bg-warning p-3">Đang chờ xác nhận</span>
+                    {% elif order.status == 'confirmed' %}
+                        <span class="badge bg-info p-3">Đã xác nhận</span>
+                    {% elif order.status == 'shipping' %}
+                        <span class="badge bg-primary p-3">Đang vận chuyển</span>
+                    {% elif order.status == 'delivered' %}
+                        <span class="badge bg-success p-3">Đã giao</span>
+                    {% elif order.status == 'cancelled' %}
+                        <span class="badge bg-danger p-3">Đã hủy</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row mt-4">
+        <div class="col-lg-12">
+            <a href="{% url 'shop:orders' %}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Quay lại danh sách đơn hàng
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Quản lý sản phẩm - Snack Shop{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-5">
+    <div class="row mb-4">
+        <div class="col-lg-8">
+            <h1>Quản lý sản phẩm</h1>
+        </div>
+        <div class="col-lg-4 text-end">
+            <a href="/admin/snackshop/product/add/" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Thêm sản phẩm mới
+            </a>
+        </div>
+    </div>
+    
+    <!-- Admin Navigation -->
+    <div class="row mb-4">
+        <div class="col-lg-12">
+            <div class="btn-group w-100" role="group">
+                <a href="{% url 'shop:admin_dashboard' %}" class="btn btn-outline-primary">Dashboard</a>
+                <a href="{% url 'shop:admin_products' %}" class="btn btn-primary">Sản phẩm</a>
+                <a href="{% url 'shop:admin_categories' %}" class="btn btn-outline-primary">Danh mục</a>
+                <a href="{% url 'shop:admin_orders' %}" class="btn btn-outline-primary">Đơn hàng</a>
+                <a href="{% url 'shop:admin_users' %}" class="btn btn-outline-primary">Người dùng</a>
+                <a href="{% url 'shop:admin_statistics' %}" class="btn btn-outline-primary">Thống kê</a>
+            </div>
+        </div>
+    </div>
+    
+    {% if products %}
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Danh sách sản phẩm ({{ products|length }})</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Hình ảnh</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Danh mục</th>
+                            <th>Giá</th>
+                            <th>Kho</th>
+                            <th>Đã bán</th>
+                            <th>Đánh giá</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for product in products %}
+                        <tr>
+                            <td>
+                                <img src="{{ product.image }}" alt="{{ product.name }}" style="width: 40px; height: 40px; object-fit: cover; border-radius: 5px;">
+                            </td>
+                            <td>{{ product.name|truncatewords:4 }}</td>
+                            <td>{{ product.category.name }}</td>
+                            <td>{{ product.price|floatformat:0 }}đ</td>
+                            <td>{{ product.stock }}</td>
+                            <td>{{ product.sold }}</td>
+                            <td><i class="fas fa-star text-warning"></i> {{ product.rating|floatformat:1 }}</td>
+                            <td>
+                                <a href="/admin/snackshop/product/{{ product.id }}/change/" class="btn btn-sm btn-warning">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="/admin/snackshop/product/{{ product.id }}/delete/" class="btn btn-sm btn-danger">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% else %}
+        <div class="alert alert-info">Không có sản phẩm nào.</div>
+    {% endif %}
+</div>
+{% endblock %}

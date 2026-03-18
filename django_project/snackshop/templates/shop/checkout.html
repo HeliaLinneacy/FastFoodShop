@@ -1,0 +1,168 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Thanh toán - Snack Shop{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="mb-4">Thanh toán</h1>
+    
+    <div class="row">
+        <!-- Checkout Form -->
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Thông tin giao hàng</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="{{ form.customer_name.id_for_label }}" class="form-label">Tên:</label>
+                                {{ form.customer_name }}
+                                {% if form.customer_name.errors %}
+                                    <div class="text-danger">{{ form.customer_name.errors }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6">
+                                <label for="{{ form.customer_email.id_for_label }}" class="form-label">Email:</label>
+                                {{ form.customer_email }}
+                                {% if form.customer_email.errors %}
+                                    <div class="text-danger">{{ form.customer_email.errors }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="{{ form.customer_phone.id_for_label }}" class="form-label">Số điện thoại:</label>
+                                {{ form.customer_phone }}
+                                {% if form.customer_phone.errors %}
+                                    <div class="text-danger">{{ form.customer_phone.errors }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="{{ form.customer_address.id_for_label }}" class="form-label">Địa chỉ giao hàng:</label>
+                            {{ form.customer_address }}
+                            {% if form.customer_address.errors %}
+                                <div class="text-danger">{{ form.customer_address.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="{{ form.note.id_for_label }}" class="form-label">Ghi chú (tùy chọn):</label>
+                            {{ form.note }}
+                        </div>
+
+                        <!-- Payment Method -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Phương thức thanh toán:</label>
+                            <div>
+                                {{ form.payment_method }}
+                            </div>
+                        </div>
+
+                        <!-- QR Code for Online Payment -->
+                        <div id="qr-payment-box" class="mb-3" style="display:none;">
+                            <label class="form-label fw-bold">Quét mã QR để thanh toán:</label>
+                            <div class="border rounded p-3 bg-light text-center">
+                                <img src="/static/qr-bidv-vietqr-bui-the-vinh.jpg" alt="QR BIDV Bui The Vinh" style="max-width: 250px; width: 100%; height: auto;">
+                                <div class="mt-2 small text-muted">BUI THE VINH - 3902618378<br>Ngân hàng BIDV</div>
+                            </div>
+                        </div>
+
+                        <script>
+                        // Hiển thị mã QR khi chọn "Thanh toán trực tuyến"
+                        document.addEventListener('DOMContentLoaded', function() {
+                            function toggleQR() {
+                                var online = document.querySelector('input[name="payment_method"][value="online"]');
+                                var qrBox = document.getElementById('qr-payment-box');
+                                if (online && online.checked) {
+                                    qrBox.style.display = '';
+                                } else {
+                                    qrBox.style.display = 'none';
+                                }
+                            }
+                            var radios = document.querySelectorAll('input[name="payment_method"]');
+                            radios.forEach(function(radio) {
+                                radio.addEventListener('change', toggleQR);
+                            });
+                            toggleQR();
+                        });
+                        </script>
+                        
+                        <button type="submit" class="btn btn-primary btn-lg w-100">
+                            <i class="fas fa-check-circle"></i> Hoàn tất đơn hàng
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Order Summary -->
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header bg-secondary text-white">
+                    <h5 class="mb-0">Tóm tắt đơn hàng</h5>
+                </div>
+                <div class="card-body">
+                    {% for item in cart_items %}
+                    <div class="row mb-3 pb-3 border-bottom">
+                        <div class="col-8">
+                            <h6>{{ item.product.name }}</h6>
+                            <small class="text-muted">x{{ item.quantity }}</small>
+                        </div>
+                        <div class="col-4 text-end">
+                            <p class="mb-0">{{ item.get_subtotal|floatformat:0 }}đ</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    
+                    <div class="row mb-2">
+                        <div class="col-6">
+                            <span>Tạm tính:</span>
+                        </div>
+                        <div class="col-6 text-end">
+                            <span>{{ total|floatformat:0 }}đ</span>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <span>Phí vận chuyển:</span>
+                        </div>
+                        <div class="col-6 text-end">
+                            <span>0đ</span>
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    
+                    <div class="row">
+                        <div class="col-6">
+                            <h5>Tổng cộng:</h5>
+                        </div>
+                        <div class="col-6 text-end">
+                            <h5 class="text-primary">{{ total|floatformat:0 }}đ</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .form-control {
+        border: 1px solid #ddd;
+    }
+    
+    .form-control:focus {
+        border-color: #FF6B6B;
+        box-shadow: 0 0 0 0.2rem rgba(255, 107, 107, 0.25);
+    }
+</style>
+{% endblock %}

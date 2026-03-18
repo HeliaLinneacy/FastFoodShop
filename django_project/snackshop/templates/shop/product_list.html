@@ -1,0 +1,136 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Sản phẩm - Snack Shop{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row mb-4">
+        <div class="col-lg-12">
+            <h1>Danh sách sản phẩm</h1>
+        </div>
+    </div>
+    
+    <div class="row">
+        <!-- Sidebar - Filters -->
+        <div class="col-lg-3 mb-4">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Bộ lọc</h5>
+                </div>
+                <div class="card-body">
+                    <form method="get" action="">
+                        <!-- Category Filter -->
+                        <div class="mb-4">
+                            <h6>Danh mục</h6>
+                            <select name="category" class="form-select" onchange="this.form.submit()">
+                                <option value="">Tất cả danh mục</option>
+                                {% for category in categories %}
+                                <option value="{{ category.id }}" {% if selected_category == category.id|stringformat:"s" %}selected{% endif %}>
+                                    {{ category.name }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        
+                        <!-- Sort Filter -->
+                        <div class="mb-4">
+                            <h6>Sắp xếp</h6>
+                            <select name="sort" class="form-select" onchange="this.form.submit()">
+                                <option value="-created_at">Mới nhất</option>
+                                <option value="price">Giá: Thấp tới cao</option>
+                                <option value="-price">Giá: Cao tới thấp</option>
+                                <option value="-sold">Bán chạy nhất</option>
+                                <option value="-rating">Đánh giá cao nhất</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Search -->
+                        <div class="mb-4">
+                            <h6>Tìm kiếm</h6>
+                            <input type="text" name="search" class="form-control" placeholder="Tìm sản phẩm..." value="{{ search_query }}">
+                            <button type="submit" class="btn btn-primary w-100 mt-2">Tìm kiếm</button>
+                        </div>
+                        
+                        <a href="{% url 'shop:product_list' %}" class="btn btn-secondary w-100">Xóa bộ lọc</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Products -->
+        <div class="col-lg-9">
+            {% if products %}
+                <div class="row">
+                    {% for product in products %}
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="card product-card h-100">
+                            <div class="product-image">
+                                <img src="{{ product.image }}" alt="{{ product.name }}" class="card-img-top">
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">{{ product.name }}</h5>
+                                <p class="card-text text-muted flex-grow-1">{{ product.description|truncatewords:15 }}</p>
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h6 class="text-primary fw-bold">{{ product.price|floatformat:0 }}đ</h6>
+                                    <small class="text-warning">
+                                        <i class="fas fa-star"></i> {{ product.rating|floatformat:1 }} ({{ product.review_count }})
+                                    </small>
+                                </div>
+                                {% if product.stock > 0 %}
+                                    <p class="text-success mb-2"><i class="fas fa-check-circle"></i> Còn {{ product.stock }} sản phẩm</p>
+                                {% else %}
+                                    <p class="text-danger mb-2"><i class="fas fa-times-circle"></i> Hết hàng</p>
+                                {% endif %}
+                                <a href="{% url 'shop:product_detail' product.id %}" class="btn btn-primary">Xem chi tiết</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <!-- Pagination -->
+                {% if page_obj.has_other_pages %}
+                <nav aria-label="Page navigation" class="mt-4">
+                    <ul class="pagination justify-content-center">
+                        {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page=1">Đầu tiên</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Trước</a>
+                        </li>
+                        {% endif %}
+                        
+                        {% for num in page_obj.paginator.page_range %}
+                            {% if page_obj.number == num %}
+                            <li class="page-item active">
+                                <span class="page-link">{{ num }}</span>
+                            </li>
+                            {% else %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                            </li>
+                            {% endif %}
+                        {% endfor %}
+                        
+                        {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Sau</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Cuối cùng</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+                {% endif %}
+            {% else %}
+                <div class="alert alert-info">
+                    <h5>Không tìm thấy sản phẩm nào</h5>
+                    <p>Vui lòng thử với các tiêu chí tìm kiếm khác.</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

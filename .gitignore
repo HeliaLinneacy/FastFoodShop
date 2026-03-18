@@ -1,0 +1,20 @@
+# Node
+node_modules/
+
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# VSCode
+.vscode/
+
+# Build
+dist/
+build/
+
+# Env
+.env
+
+# File không cần thiết
+*.exe

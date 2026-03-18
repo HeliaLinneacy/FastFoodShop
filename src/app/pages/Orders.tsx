@@ -1,0 +1,137 @@
+import { useNavigate } from 'react-router';
+import { useAuth } from '../contexts/AuthContext';
+import { useData } from '../contexts/DataContext';
+import { Card, CardContent } from '../components/ui/card';
+import { OrderStatusBadge } from '../components/OrderStatusBadge';
+import { Package } from 'lucide-react';
+import { Button } from '../components/ui/button';
+
+export function Orders() {
+  const navigate = useNavigate();
+  const { currentUser } = useAuth();
+  const { getOrdersByUserId } = useData();
+
+  if (!currentUser) {
+    return (
+      <div className="container mx-auto px-4 py-12">
+        <div className="max-w-md mx-auto text-center">
+          <h2 className="text-2xl font-bold mb-4">Vui lòng đăng nhập</h2>
+          <p className="text-gray-600 mb-6">
+            Bạn cần đăng nhập để xem đơn hàng
+          </p>
+          <Button onClick={() => navigate('/login')} className="bg-orange-500 hover:bg-orange-600">
+            Đăng nhập
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
+  const orders = getOrdersByUserId(currentUser.id).sort(
+    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  );
+
+  const formatPrice = (price: number) => {
+    return new Intl.NumberFormat('vi-VN', {
+      style: 'currency',
+      currency: 'VND',
+    }).format(price);
+  };
+
+  const formatDate = (date: string) => {
+    return new Date(date).toLocaleString('vi-VN', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+  };
+
+  if (orders.length === 0) {
+    return (
+      <div className="container mx-auto px-4 py-12">
+        <div className="max-w-md mx-auto text-center">
+          <Package className="h-24 w-24 mx-auto text-gray-300 mb-4" />
+          <h2 className="text-2xl font-bold mb-2">Chưa có đơn hàng nào</h2>
+          <p className="text-gray-600 mb-6">
+            Bạn chưa có đơn hàng nào. Hãy bắt đầu mua sắm!
+          </p>
+          <Button
+            onClick={() => navigate('/products')}
+            className="bg-orange-500 hover:bg-orange-600"
+          >
+            Mua sắm ngay
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold mb-8">Đơn hàng của tôi</h1>
+
+      <div className="space-y-4">
+        {orders.map(order => (
+          <Card key={order.id}>
+            <CardContent className="p-6">
+              <div className="flex items-start justify-between mb-4">
+                <div>
+                  <div className="flex items-center gap-3 mb-2">
+                    <h3 className="font-semibold">Đơn hàng #{order.id}</h3>
+                    <OrderStatusBadge status={order.status} />
+                  </div>
+                  <div className="text-sm text-gray-600">
+                    Đặt ngày: {formatDate(order.createdAt)}
+                  </div>
+                </div>
+                <div className="text-right">
+                  <div className="text-sm text-gray-600 mb-1">Tổng tiền</div>
+                  <div className="text-lg font-bold text-orange-500">
+                    {formatPrice(order.total)}
+                  </div>
+                </div>
+              </div>
+
+              <div className="border-t pt-4">
+                <div className="space-y-3">
+                  {order.items.map(item => (
+                    <div key={item.id} className="flex gap-3">
+                      <img
+                        src={item.productImage}
+                        alt={item.productName}
+                        className="w-16 h-16 object-cover rounded"
+                      />
+                      <div className="flex-1">
+                        <div className="font-medium">{item.productName}</div>
+                        <div className="text-sm text-gray-600">
+                          {formatPrice(item.price)} x {item.quantity}
+                        </div>
+                      </div>
+                      <div className="font-medium">
+                        {formatPrice(item.subtotal)}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {order.note && (
+                <div className="mt-4 pt-4 border-t">
+                  <div className="text-sm text-gray-600">Ghi chú: {order.note}</div>
+                </div>
+              )}
+
+              <div className="mt-4 pt-4 border-t text-sm text-gray-600">
+                <div>Người nhận: {order.customerName}</div>
+                <div>Số điện thoại: {order.customerPhone}</div>
+                <div>Địa chỉ: {order.customerAddress}</div>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    </div>
+  );
+}
