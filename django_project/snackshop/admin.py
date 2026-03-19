@@ -3,7 +3,6 @@ from .models import (
     CustomUser, Category, Product, Review, Order, OrderItem, Cart, CartItem
 )
 
-
 # Minimal admin registration - no custom configuration
 admin.site.register(CustomUser)
 admin.site.register(Category)
