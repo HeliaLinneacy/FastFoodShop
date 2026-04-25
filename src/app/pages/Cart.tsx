@@ -11,10 +11,12 @@ export function Cart() {
   const { cart, updateQuantity, removeFromCart, getCartTotal } = useCart();
   const { products } = useData();
 
-  const cartItems = cart.map(item => {
-    const product = products.find(p => p.id === item.productId);
-    return { ...item, product };
-  }).filter(item => item.product);
+  const cartItems = cart
+    .map((item) => ({
+      ...item,
+      product: products.find((p) => p.id === item.productId),
+    }))
+    .filter((item) => item.product);
 
   const total = getCartTotal(products);
 
