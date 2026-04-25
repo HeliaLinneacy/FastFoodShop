@@ -29,3 +29,14 @@ export function Login() {
       toast.error('Email hoặc mật khẩu không đúng');
     }
   };
+ return (
+    <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center bg-gray-50 px-4 py-12">
+      <Card className="w-full max-w-md">
+        
+        <CardHeader className="space-y-4">
+          {/* Logo */}
+          <div className="flex justify-center">
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-orange-500">
+              <Package className="h-7 w-7 text-white" />
+            </div>
+          </div>
