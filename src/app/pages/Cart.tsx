@@ -88,7 +88,9 @@ export function Cart() {
                             <Button
                               variant="ghost"
                               size="icon"
-                              onClick={() => updateQuantity(productId, quantity - 1)}
+                              const increase = (id: string, quantity: number) => {
+                              updateQuantity(id, quantity + 1);
+                              };
                             >
                               <Minus className="h-4 w-4" />
                             </Button>
