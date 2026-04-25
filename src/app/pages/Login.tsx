@@ -71,3 +71,21 @@ export function Login() {
                 required
               />
             </div>
+{/* Password */}
+            <div>
+              <Label htmlFor="password">Mật khẩu</Label>
+              <Input
+                id="password"
+                type="password"
+                placeholder="••••••••"
+                autoComplete="current-password"
+                value={formData.password}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    password: e.target.value,
+                  })
+                }
+                required
+              />
+            </div>
