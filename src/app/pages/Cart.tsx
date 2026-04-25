@@ -58,8 +58,7 @@ export function Cart() {
         {/* Cart Items */}
         <div className="lg:col-span-2">
           <Card>
-            <CardContent className="p-6">
-              <div className="space-y-4">
+            <CardContent className="p-6 space-y-4">
                 {cartItems.map(({ product, quantity, productId }) => {
                   if (!product) return null;
                   
