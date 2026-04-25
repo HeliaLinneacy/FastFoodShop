@@ -89,3 +89,23 @@ export function Login() {
                 required
               />
             </div>
+ {/* Submit */}
+            <Button
+              type="submit"
+              className="w-full bg-orange-500 hover:bg-orange-600"
+              size="lg"
+            >
+              Đăng nhập
+            </Button>
+          </form>
+
+          {/* Register link */}
+          <div className="mt-6 text-center text-sm">
+            <span className="text-gray-600">Chưa có tài khoản? </span>
+            <Link
+              to="/register"
+              className="text-orange-500 hover:underline font-medium"
+            >
+              Đăng ký ngay
+            </Link>
+          </div>
