@@ -40,3 +40,34 @@ export function Login() {
               <Package className="h-7 w-7 text-white" />
             </div>
           </div>
+{/* Title */}
+          <div className="text-center">
+            <h1 className="text-2xl font-bold">Đăng nhập</h1>
+            <p className="text-gray-600 mt-2">
+              Chào mừng bạn quay lại SnackShop
+            </p>
+          </div>
+        </CardHeader>
+
+        <CardContent>
+          {/* Form đăng nhập */}
+          <form onSubmit={handleSubmit} className="space-y-4">
+            
+            {/* Email */}
+            <div>
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="your@email.com"
+                autoComplete="email"
+                value={formData.email}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    email: e.target.value,
+                  })
+                }
+                required
+              />
+            </div>
