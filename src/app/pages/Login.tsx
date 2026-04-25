@@ -16,3 +16,16 @@ export function Login() {
     email: '',
     password: '',
   });
+// Xử lý submit form
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const success = login(formData.email, formData.password);
+
+    if (success) {
+      toast.success('Đăng nhập thành công!');
+      navigate('/');
+    } else {
+      toast.error('Email hoặc mật khẩu không đúng');
+    }
+  };
