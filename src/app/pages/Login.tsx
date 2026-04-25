@@ -109,3 +109,18 @@ export function Login() {
               Đăng ký ngay
             </Link>
           </div>
+{/* Demo account */}
+          <div className="mt-4 p-4 bg-blue-50 rounded-lg text-sm">
+            <p className="font-semibold mb-2">Tài khoản demo:</p>
+            <p className="text-gray-700">
+              Admin: admin@snackshop.com / admin123
+            </p>
+            <p className="text-gray-700">
+              User: user@example.com / user123
+            </p>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
