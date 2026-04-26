@@ -31,12 +31,11 @@ export function Checkout() {
 
   const total = getCartTotal(products);
 
-  const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('vi-VN', {
-      style: 'currency',
-      currency: 'VND',
-    }).format(price);
-  };
+const formatPrice = (price: number) =>
+  new Intl.NumberFormat('vi-VN', {
+    style: 'currency',
+    currency: 'VND',
+  }).format(price);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
