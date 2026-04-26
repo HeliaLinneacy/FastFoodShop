@@ -41,12 +41,12 @@ export function Register() {
     const { confirmPassword, ...userData } = formData;
     const success = register(userData);
     
-    if (success) {
-      toast.success('Đăng ký thành công!');
-      navigate('/');
-    } else {
-      toast.error('Email đã được sử dụng');
+    if (!success) {
+    return toast.error('Email đã được sử dụng');
     }
+    
+    toast.success('Đăng ký thành công!');
+    navigate('/');
   };
 
   return (
