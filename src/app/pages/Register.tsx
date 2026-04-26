@@ -80,7 +80,12 @@ export function Register() {
                 type="email"
                 placeholder="your@email.com"
                 value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                const handleChange = (field: string, value: string) => {
+                setFormData({
+                  ...formData,
+                  [field]: value,
+                });
+              };
                 required
               />
             </div>
