@@ -43,10 +43,9 @@ const formatPrice = (price: number) =>
     e.preventDefault();
 
     if (!currentUser) {
-      toast.error('Vui lòng đăng nhập để đặt hàng');
-      navigate('/login');
-      return;
-    }
+    toast.error('Vui lòng đăng nhập');
+    return navigate('/login');
+  }
 
     if (cart.length === 0) {
       toast.error('Giỏ hàng trống');
