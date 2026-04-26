@@ -53,15 +53,16 @@ const formatPrice = (price: number) =>
       return;
     }
 
-    const orderItems = cartItems.map(({ product, quantity, productId }) => ({
-      id: `item-${Date.now()}-${productId}`,
-      productId,
-      productName: product!.name,
-      productImage: product!.image,
-      price: product!.price,
-      quantity,
-      subtotal: product!.price * quantity,
-    }));
+    const buildOrderItems = () =>
+  cartItems.map(({ product, quantity, productId }) => ({
+    id: `item-${Date.now()}-${productId}`,
+    productId,
+    productName: product!.name,
+    productImage: product!.image,
+    price: product!.price,
+    quantity,
+    subtotal: product!.price * quantity,
+  }));
 
     addOrder({
       userId: currentUser.id,
