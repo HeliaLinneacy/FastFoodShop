@@ -64,7 +64,12 @@ export function Profile() {
                 <Input
                   id="fullName"
                   value={formData.fullName}
-                  onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+                  const handleChange = (field: string, value: string) => {
+                  setFormData({
+                    ...formData,
+                    [field]: value,
+                  });
+                };
                   required
                 />
               </div>
