@@ -31,10 +31,13 @@ export function Profile() {
   }
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    updateProfile(currentUser.id, formData);
-    toast.success('Cập nhật hồ sơ thành công!');
-  };
+  e.preventDefault();
+
+  if (!currentUser) return;
+
+  updateProfile(currentUser.id, formData);
+  toast.success('Cập nhật hồ sơ thành công!');
+};
 
   return (
     <div className="container mx-auto px-4 py-8">
