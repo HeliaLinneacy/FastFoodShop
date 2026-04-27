@@ -126,7 +126,7 @@ export function Profile() {
             <div className="flex justify-between">
               <span className="text-gray-600">Ngày tạo:</span>
               <span className="font-medium">
-                {new Date(currentUser.createdAt).toLocaleDateString('vi-VN')}
+                {const formatDate = (date: string) => new Date(date).toLocaleDateString('vi-VN');}
               </span>
             </div>
           </CardContent>
