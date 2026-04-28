@@ -44,7 +44,7 @@ export function AdminCategories() {
     setEditingCategory(null);
   };
 
-  const handleEdit = (category: Category) => {
+  const handleEdit = useCallback((category: Category) => {
     setEditingCategory(category);
     setFormData({
       name: category.name,
