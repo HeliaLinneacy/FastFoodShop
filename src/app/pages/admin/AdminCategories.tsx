@@ -121,7 +121,7 @@ export function AdminCategories() {
              {categories.length > 0 ? categories.map((category) => {
                 const productCount = productCountMap[category.id] || 0;
                 return (
-                  <TableRow key={category.id}>
+                  <TableRow key={category.id ?? category.slug}>
                     <TableCell className="font-medium">{category.name}</TableCell>
                     <TableCell>{category.description}</TableCell>
                     <TableCell className="text-gray-600">{category.slug}</TableCell>
