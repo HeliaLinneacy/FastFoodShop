@@ -85,9 +85,13 @@ if (!products || !categories) return null;
             </Link>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {featuredProducts.map(product => (
-              <ProductCard key={product.id} product={product} />
-            ))}
+            {featuredProducts.length > 0 ? (
+            featuredProducts.map((product) => (
+              <ProductCard key={product.id ?? product.name} product={product} />
+            ))
+          ) : (
+            <p className="text-gray-500">Không có sản phẩm</p>
+          )}
           </div>
         </div>
       </section>
