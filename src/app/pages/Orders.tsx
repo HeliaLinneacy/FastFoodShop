@@ -25,7 +25,7 @@ export function Orders() {
     return (
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-md mx-auto text-center">
-          <h2 className="text-2xl font-bold mb-4">Vui lòng đăng nhập</h2>
+          <h2 className="text-2xl font-bold mb-4">{TEXT.loginRequired}</h2>
           <p className="text-gray-600 mb-6">
             Bạn cần đăng nhập để xem đơn hàng
           </p>
