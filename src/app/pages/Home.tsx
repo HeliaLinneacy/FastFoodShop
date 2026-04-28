@@ -7,7 +7,7 @@ import { ArrowRight, Package } from 'lucide-react';
 import { useMemo } from 'react';
 
 export function Home() {
-  const { products, categories } = useData();
+  const { products = [], categories = [] } = useData();
   const FEATURED_LIMIT = 8;
 
 const TEXT = {
