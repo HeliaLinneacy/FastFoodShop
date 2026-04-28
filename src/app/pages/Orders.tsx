@@ -37,9 +37,16 @@ export function Orders() {
     );
   }
 
-  const orders = getOrdersByUserId(currentUser.id).sort(
-    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-  );
+  const orders = useMemo(() => {
+  if (!currentUser) return [];
+  return getOrdersByUserId(currentUser.id)
+    .slice()
+    .sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() -
+        new Date(a.createdAt).getTime()
+    );
+}, [currentUser, getOrdersByUserId]);
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('vi-VN', {
