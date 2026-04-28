@@ -36,10 +36,10 @@ if (!products || !categories) return null;
         <div className="container mx-auto px-4">
           <div className="max-w-2xl">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Chào mừng đến với SnackShop
+              {TEXT.title}
             </h1>
             <p className="text-lg mb-8 text-orange-50">
-              Hàng ngàn sản phẩm đồ ăn vặt chất lượng cao, giao hàng nhanh chóng
+              {TEXT.subtitle}
             </p>
             <Link to="/products">
               <Button size="lg" variant="secondary" className="bg-white text-orange-600 hover:bg-orange-50">
