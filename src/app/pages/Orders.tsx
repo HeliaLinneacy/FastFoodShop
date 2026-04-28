@@ -72,7 +72,7 @@ export function Orders() {
           <Package className="h-24 w-24 mx-auto text-gray-300 mb-4" />
           <h2 className="text-2xl font-bold mb-2">{TEXT.emptyTitle}</h2>
           <p className="text-gray-600 mb-6">
-            Bạn chưa có đơn hàng nào. Hãy bắt đầu mua sắm!
+            {TEXT.emptyDesc}
           </p>
           <Button
             onClick={() => navigate('/products')}
