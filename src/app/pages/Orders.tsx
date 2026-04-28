@@ -91,7 +91,7 @@ export function Orders() {
 
       <div className="space-y-4">
         {orders.map(order => (
-          <Card key={order.id}>
+          <Card key={order.id ?? order.createdAt}>
             <CardContent className="p-6">
               <div className="flex items-start justify-between mb-4">
                 <div>
