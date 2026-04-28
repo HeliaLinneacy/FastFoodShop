@@ -104,7 +104,7 @@ export function Orders() {
                   </div>
                 </div>
                 <div className="text-right">
-                  <div className="text-sm text-gray-600 mb-1">Tổng tiền</div>
+                  <div className="text-sm text-gray-600 mb-1">{TEXT.total}</div>
                   <div className="text-lg font-bold text-orange-500">
                     {formatPrice(order.total)}
                   </div>
