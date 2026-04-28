@@ -78,7 +78,7 @@ export function Orders() {
             onClick={() => navigate('/products')}
             className="bg-orange-500 hover:bg-orange-600"
           >
-            Mua sắm ngay
+            {TEXT.shopNow}
           </Button>
         </div>
       </div>
