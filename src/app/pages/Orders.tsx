@@ -11,7 +11,16 @@ export function Orders() {
   const navigate = useNavigate();
   const { currentUser } = useAuth();
   const { getOrdersByUserId } = useData();
-
+  const TEXT = {
+  loginRequired: "Vui lòng đăng nhập",
+  loginDesc: "Bạn cần đăng nhập để xem đơn hàng",
+  loginBtn: "Đăng nhập",
+  emptyTitle: "Chưa có đơn hàng nào",
+  emptyDesc: "Bạn chưa có đơn hàng nào. Hãy bắt đầu mua sắm!",
+  shopNow: "Mua sắm ngay",
+  myOrders: "Đơn hàng của tôi",
+  total: "Tổng tiền",
+};
   if (!currentUser) {
     return (
       <div className="container mx-auto px-4 py-12">
