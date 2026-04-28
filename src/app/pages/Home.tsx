@@ -20,6 +20,7 @@ const TEXT = {
 };
 
 const containerClass = "container mx-auto px-4";
+if (!products || !categories) return null;
 
   // Get featured products (top rated)
   const featuredProducts = useMemo(() => {
