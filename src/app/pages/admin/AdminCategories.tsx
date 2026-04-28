@@ -75,6 +75,13 @@ export function AdminCategories() {
       toast.error('Không thể xóa danh mục có sản phẩm');
       return;
     }
+    const productCountMap = useMemo(() => {
+    const map: Record<string, number> = {};
+    products.forEach((p) => {
+      map[p.categoryId] = (map[p.categoryId] || 0) + 1;
+    });
+    return map;
+  }, [products]);
 
     if (confirm(`Bạn có chắc muốn xóa danh mục "${name}"?`)) {
       deleteCategory(id);
