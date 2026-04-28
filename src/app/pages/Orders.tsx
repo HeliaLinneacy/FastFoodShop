@@ -48,7 +48,7 @@ export function Orders() {
     );
 }, [currentUser, getOrdersByUserId]);
 
-  const formatPrice = (price: number) => {
+  const formatPrice = useCallback((price: number) => {
     return new Intl.NumberFormat('vi-VN', {
       style: 'currency',
       currency: 'VND',
