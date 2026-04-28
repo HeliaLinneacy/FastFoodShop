@@ -55,7 +55,7 @@ export function Orders() {
     }).format(price);
   };
 
-  const formatDate = (date: string) => {
+  const formatDate = useCallback((date: string) => {
     return new Date(date).toLocaleString('vi-VN', {
       year: 'numeric',
       month: '2-digit',
