@@ -9,9 +9,11 @@ export function Home() {
   const { products, categories } = useData();
 
   // Get featured products (top rated)
-  const featuredProducts = [...products]
+  const featuredProducts = useMemo(() => {
+  return [...products]
     .sort((a, b) => b.rating - a.rating)
     .slice(0, 8);
+}, [products]);
 
   return (
     <div className="min-h-screen">
