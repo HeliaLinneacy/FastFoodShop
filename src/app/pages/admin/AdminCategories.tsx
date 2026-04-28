@@ -69,7 +69,7 @@ export function AdminCategories() {
     resetForm();
   };
 
-  const handleDelete = (id: string, name: string) => {
+  const handleDelete = useCallback((id: string, name: string) => {
     const hasProducts = products.some(p => p.categoryId === id);
     if (hasProducts) {
       toast.error('Không thể xóa danh mục có sản phẩm');
