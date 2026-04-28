@@ -30,7 +30,7 @@ export function Orders() {
             {TEXT.loginDesc}
           </p>
           <Button onClick={() => navigate('/login')} className="bg-orange-500 hover:bg-orange-600">
-            Đăng nhập
+            {TEXT.loginBtn}
           </Button>
         </div>
       </div>
