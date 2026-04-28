@@ -27,7 +27,7 @@ export function Orders() {
         <div className="max-w-md mx-auto text-center">
           <h2 className="text-2xl font-bold mb-4">{TEXT.loginRequired}</h2>
           <p className="text-gray-600 mb-6">
-            Bạn cần đăng nhập để xem đơn hàng
+            {TEXT.loginDesc}
           </p>
           <Button onClick={() => navigate('/login')} className="bg-orange-500 hover:bg-orange-600">
             Đăng nhập
