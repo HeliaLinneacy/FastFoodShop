@@ -87,7 +87,7 @@ export function Orders() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8">Đơn hàng của tôi</h1>
+      <h1 className="text-3xl font-bold mb-8">{TEXT.myOrders}</h1>
 
       <div className="space-y-4">
         {orders.map(order => (
