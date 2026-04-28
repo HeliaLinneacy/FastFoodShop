@@ -39,7 +39,7 @@ export function AdminCategories() {
     slug: '',
   });
 
-  const resetForm = () => {
+  const resetForm = useCallback(() => {
     setFormData({ name: '', description: '', slug: '' });
     setEditingCategory(null);
   };
