@@ -43,7 +43,7 @@ if (!products || !categories) return null;
             </p>
             <Link to="/products">
               <Button size="lg" variant="secondary" className="bg-white text-orange-600 hover:bg-orange-50">
-                Khám phá ngay
+                {TEXT.explore}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
