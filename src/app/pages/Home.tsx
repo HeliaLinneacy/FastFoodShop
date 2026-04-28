@@ -79,7 +79,7 @@ if (!products || !categories) return null;
             <h2 className="text-2xl font-bold">{TEXT.featured}</h2>
             <Link to="/products">
               <Button variant="outline">
-                Xem tất cả
+                {TEXT.viewAll}
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
