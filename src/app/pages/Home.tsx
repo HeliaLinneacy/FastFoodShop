@@ -76,7 +76,7 @@ if (!products || !categories) return null;
       <section className="py-12">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold">Sản phẩm nổi bật</h2>
+            <h2 className="text-2xl font-bold">{TEXT.featured}</h2>
             <Link to="/products">
               <Button variant="outline">
                 Xem tất cả
