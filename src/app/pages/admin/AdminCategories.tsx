@@ -20,6 +20,17 @@ export function AdminCategories() {
   deleteCategory 
 } = useData();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const TEXT = {
+  title: "Quản lý danh mục",
+  add: "Thêm danh mục",
+  edit: "Chỉnh sửa danh mục",
+  create: "Thêm danh mục mới",
+  update: "Cập nhật",
+  createBtn: "Thêm mới",
+  cancel: "Hủy",
+  deleteError: "Không thể xóa danh mục có sản phẩm",
+  deleteSuccess: "Đã xóa danh mục",
+};
   const [editingCategory, setEditingCategory] = useState<Category | null>(null);
 
   const [formData, setFormData] = useState({
