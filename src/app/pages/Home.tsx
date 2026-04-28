@@ -3,6 +3,7 @@ import { useData } from '../contexts/DataContext';
 import { ProductCard } from '../components/ProductCard';
 import { Button } from '../components/ui/button';
 import { ArrowRight, Package } from 'lucide-react';
+import { useMemo } from 'react';
 
 export function Home() {
   const { products, categories } = useData();
