@@ -116,7 +116,7 @@ export function Orders() {
                   {order.items.map(item => (
                     <div key={item.id ?? item.productName} className="flex gap-3">
                       <img
-                        src={item.productImage}
+                        src={item.productImage || '/placeholder.png'}
                         alt={item.productName}
                         className="w-16 h-16 object-cover rounded"
                       />
