@@ -12,7 +12,13 @@ import { Category } from '../../types';
 import { toast } from 'sonner';
 
 export function AdminCategories() {
-  const { categories, products, addCategory, updateCategory, deleteCategory } = useData();
+  const { 
+  categories = [], 
+  products = [], 
+  addCategory, 
+  updateCategory, 
+  deleteCategory 
+} = useData();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingCategory, setEditingCategory] = useState<Category | null>(null);
 
