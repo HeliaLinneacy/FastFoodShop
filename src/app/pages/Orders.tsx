@@ -114,7 +114,7 @@ export function Orders() {
               <div className="border-t pt-4">
                 <div className="space-y-3">
                   {order.items.map(item => (
-                    <div key={item.id} className="flex gap-3">
+                    <div key={item.id ?? item.productName} className="flex gap-3">
                       <img
                         src={item.productImage}
                         alt={item.productName}
