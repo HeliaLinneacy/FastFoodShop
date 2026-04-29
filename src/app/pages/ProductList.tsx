@@ -144,7 +144,7 @@ export function ProductList() {
         </div>
       ) : (
         <div className="text-center py-12">
-          <p className="text-gray-500">Không tìm thấy sản phẩm nào</p>
+          <p className="text-gray-500">{TEXT.noResult}</p>
         </div>
       )}
     </div>
