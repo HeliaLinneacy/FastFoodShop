@@ -158,7 +158,7 @@ const reviews = useMemo(() => {
               <span className="ml-2 font-medium">{product.stock} sản phẩm</span>
             </div>
             <div>
-              <span className="text-gray-500">Đã bán:</span>
+              <span className="text-gray-500">{TEXT.sold}:</span>
               <span className="ml-2 font-medium">{product.sold}</span>
             </div>
           </div>
