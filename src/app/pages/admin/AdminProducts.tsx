@@ -95,12 +95,12 @@ export function AdminProducts() {
     resetForm();
   };
 
-  const handleDelete = (id: string, name: string) => {
+  const handleDelete = useCallback((id: string, name: string)) => {
     if (confirm(`Bạn có chắc muốn xóa sản phẩm "${name}"?`)) {
       deleteProduct(id);
       toast.success('Đã xóa sản phẩm');
     }
-  };
+  }, [deleteProduct]);
 
   const filteredProducts = products.filter(p =>
     p.name.toLowerCase().includes(searchQuery.toLowerCase())
