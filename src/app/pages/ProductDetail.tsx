@@ -53,7 +53,7 @@ const reviews = useMemo(() => {
   if (!product) {
     return (
       <div className={`${containerClass} py-12 text-center`}>
-        <p className="text-gray-500">Không tìm thấy sản phẩm</p>
+        <p className="text-gray-500">{TEXT.notFound}</p>
         <Button onClick={() => navigate('/products')} className="mt-4">
           Quay lại danh sách
         </Button>
