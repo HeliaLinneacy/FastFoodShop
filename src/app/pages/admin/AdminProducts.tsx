@@ -102,10 +102,13 @@ export function AdminProducts() {
     }
   }, [deleteProduct]);
 
-  const filteredProducts = products.filter(p =>
-    p.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
+  const filteredProducts = useMemo(() => {
+    if (!products.length) return [];
+  
+    return products.filter((p) =>
+      p.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  }, [products, searchQuery]);
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('vi-VN', {
       style: 'currency',
