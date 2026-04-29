@@ -111,10 +111,9 @@ export function ProductList() {
                 <SelectItem key={cat.id} value={cat.id}>
                   {cat.name}
                 </SelectItem>
-              ))}
+              )) : null}
             </SelectContent>
           </Select>
-
           {/* Sort */}
           <Select value={sortBy} onValueChange={setSortBy}>
             <SelectTrigger>
