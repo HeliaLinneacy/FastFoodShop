@@ -123,7 +123,7 @@ export function ProductList() {
               <SelectItem value="name">{TEXT.sortName}</SelectItem>
               <SelectItem value="price-asc">{TEXT.sortPriceAsc}</SelectItem>
               <SelectItem value="price-desc">{TEXT.sortPriceDesc}</SelectItem>
-              <SelectItem value="rating">Đánh giá cao nhất</SelectItem>
+              <SelectItem value="rating">{TEXT.sortRating}</SelectItem>
               <SelectItem value="sold">Bán chạy nhất</SelectItem>
             </SelectContent>
           </Select>
