@@ -106,7 +106,7 @@ export function ProductList() {
               <SelectValue placeholder="Danh mục" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">Tất cả danh mục</SelectItem>
+              <SelectItem value="all">{TEXT.allCategory}</SelectItem>
               {categories.map(cat => (
                 <SelectItem key={cat.id} value={cat.id}>
                   {cat.name}
