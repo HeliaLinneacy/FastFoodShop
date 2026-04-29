@@ -10,6 +10,13 @@ import { Eye } from 'lucide-react';
 import { Order, OrderStatus } from '../../types';
 import { toast } from 'sonner';
 
+const TEXT = {
+  title: 'Quản lý đơn hàng',
+  filterPlaceholder: 'Lọc theo trạng thái',
+  total: 'Tổng cộng:',
+};
+
+const containerClass = 'container mx-auto px-4';
 export function AdminOrders() {
   const { orders, updateOrder } = useData();
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
