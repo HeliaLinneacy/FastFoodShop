@@ -178,7 +178,7 @@ const reviews = useMemo(() => {
               <Button
                 variant="ghost"
                 size="icon"
-                onClick={() => setQuantity(Math.min(product.stock, quantity + 1))}
+                onClick={() => setQuantity((prev) => Math.min(product.stock, prev + 1))}
               >
                 <Plus className="h-4 w-4" />
               </Button>
