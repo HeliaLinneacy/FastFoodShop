@@ -170,7 +170,7 @@ const reviews = useMemo(() => {
               <Button
                 variant="ghost"
                 size="icon"
-                onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                onClick={() => setQuantity((prev) => Math.max(1, prev - 1))}
               >
                 <Minus className="h-4 w-4" />
               </Button>
