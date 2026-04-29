@@ -88,7 +88,7 @@ export function AdminOrders() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {filteredOrders.map(order => (
+              {filteredOrders.length > 0 ? filteredOrders.map((order) => (
                 <TableRow key={order.id}>
                   <TableCell className="font-medium">#{order.id}</TableCell>
                   <TableCell>
