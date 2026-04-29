@@ -165,7 +165,7 @@ const reviews = useMemo(() => {
 
           {/* Quantity */}
           <div className="flex items-center gap-4 mb-6">
-            <span className="font-medium">Số lượng:</span>
+            <span className="font-medium">{TEXT.quantity}:</span>
             <div className="flex items-center border rounded-lg">
               <Button
                 variant="ghost"
