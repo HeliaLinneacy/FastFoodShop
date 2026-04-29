@@ -210,7 +210,7 @@ const reviews = useMemo(() => {
 
       {/* Reviews */}
       <div>
-        <h2 className="text-2xl font-bold mb-6">Đánh giá sản phẩm</h2>
+        <h2 className="text-2xl font-bold mb-6">{TEXT.reviewTitle}</h2>
 
         {/* Add Review Form */}
         {currentUser && (
