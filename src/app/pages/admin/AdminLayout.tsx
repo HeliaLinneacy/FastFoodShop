@@ -33,7 +33,7 @@ export function AdminLayout() {
     );
   }
 
-  const menuItems = [
+  const menuItems = useMemo(() => [
     { path: '/admin', label: 'Dashboard', icon: LayoutDashboard },
     { path: '/admin/products', label: 'Sản phẩm', icon: Package },
     { path: '/admin/categories', label: 'Danh mục', icon: Tag },
