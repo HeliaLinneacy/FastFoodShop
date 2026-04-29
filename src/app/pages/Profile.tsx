@@ -38,7 +38,12 @@ export function Profile() {
       </div>
     );
   }
-
+  const handleChange = useCallback((field: string, value: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  }, []);
   const handleSubmit = (e: React.FormEvent) => {
   e.preventDefault();
 
