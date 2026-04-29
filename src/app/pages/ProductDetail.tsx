@@ -36,10 +36,20 @@ export function ProductDetail() {
   const [rating, setRating] = useState(5);
   const [comment, setComment] = useState('');
 
-  const product = getProductById(id!);
-  const category = product ? getCategoryById(product.categoryId) : null;
-  const reviews = product ? getReviewsByProductId(product.id) : [];
+  const product = useMemo(() => {
+  if (!id) return null;
+  return getProductById(id);
+}, [id, getProductById]);
 
+const category = useMemo(() => {
+  if (!product) return null;
+  return getCategoryById(product.categoryId);
+}, [product, getCategoryById]);
+
+const reviews = useMemo(() => {
+  if (!product) return [];
+  return getReviewsByProductId(product.id);
+}, [product, getReviewsByProductId]);
   if (!product) {
     return (
       <div className="container mx-auto px-4 py-12 text-center">
