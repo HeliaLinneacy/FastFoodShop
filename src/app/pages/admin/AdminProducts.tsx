@@ -160,7 +160,7 @@ export function AdminProducts() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {filteredProducts.map(product => {
+              {filteredProducts.length > 0 ? filteredProducts.map((product) => {
                 const category = categories.find(c => c.id === product.categoryId);
                 return (
                   <TableRow key={product.id}>
@@ -197,7 +197,13 @@ export function AdminProducts() {
                     </TableCell>
                   </TableRow>
                 );
-              })}
+              }) : (
+                <TableRow>
+                  <TableCell colSpan={8} className="text-center py-6 text-gray-500">
+                    {TEXT.noData}
+                  </TableCell>
+                </TableRow>
+              )}
             </TableBody>
           </Table>
         </CardContent>
