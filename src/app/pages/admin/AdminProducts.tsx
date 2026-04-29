@@ -49,7 +49,12 @@ export function AdminProducts() {
     });
     setEditingProduct(null);
   };
-
+  const handleChange = useCallback((field: string, value: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  }, []);
   const handleEdit = (product: Product) => {
     setEditingProduct(product);
     setFormData({
