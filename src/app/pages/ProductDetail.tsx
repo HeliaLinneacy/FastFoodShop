@@ -262,7 +262,7 @@ const reviews = useMemo(() => {
         <div className="space-y-4">
           {reviews.length > 0 ? (
             reviews.map(review => (
-              <Card key={review.id}>
+              <Card key={review.id ?? review.createdAt}>
                 <CardContent className="p-6">
                   <div className="flex items-start justify-between mb-2">
                     <div>
