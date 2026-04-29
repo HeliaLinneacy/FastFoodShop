@@ -242,7 +242,7 @@ const reviews = useMemo(() => {
                 </div>
                 <div className="mb-4">
                   <label className="block text-sm font-medium mb-2">
-                    Nhận xét
+                    {TEXT.comment}
                   </label>
                   <Textarea
                     value={comment}
