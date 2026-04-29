@@ -40,8 +40,7 @@ export function AdminLayout() {
     { path: '/admin/orders', label: 'Đơn hàng', icon: ShoppingBag },
     { path: '/admin/users', label: 'Người dùng', icon: Users },
     { path: '/admin/statistics', label: 'Thống kê', icon: BarChart3 },
-  ];
-
+  ], []);
   return (
     <div className="flex min-h-[calc(100vh-4rem)]">
       {/* Sidebar */}
