@@ -22,9 +22,17 @@ export function AdminOrders() {
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
   const [filterStatus, setFilterStatus] = useState<string>('all');
 
-  const filteredOrders = orders
-    .filter(o => filterStatus === 'all' || o.status === filterStatus)
-    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+  const filteredOrders = useMemo(() => {
+  if (!orders.length) return [];
+
+  return orders
+    .filter((o) => filterStatus === 'all' || o.status === filterStatus)
+    .sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() -
+        new Date(a.createdAt).getTime()
+    );
+}, [orders, filterStatus]);
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('vi-VN', {
