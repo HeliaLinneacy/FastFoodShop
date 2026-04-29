@@ -68,15 +68,19 @@ export function ProductList() {
   });
   }, [products, searchQuery, selectedCategory, sortBy]);
 
-  const handleCategoryChange = (value: string) => {
-    setSelectedCategory(value);
-    if (value === 'all') {
-      searchParams.delete('category');
-    } else {
-      searchParams.set('category', value);
-    }
-    setSearchParams(searchParams);
-  };
+  const handleCategoryChange = useCallback((value: string) => {
+  setSelectedCategory(value);
+
+  const params = new URLSearchParams(searchParams);
+
+  if (value === 'all') {
+    params.delete('category');
+  } else {
+    params.set('category', value);
+  }
+
+  setSearchParams(params);
+}, [searchParams, setSearchParams]);
 
   return (
     <div className="container mx-auto px-4 py-8">
