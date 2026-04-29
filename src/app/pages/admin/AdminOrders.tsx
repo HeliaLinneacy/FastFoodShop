@@ -54,7 +54,7 @@ export function AdminOrders() {
   }, [updateOrder, selectedOrder]);
 
   return (
-    <div>
+    <div className={`${containerClass} py-8`}>
       <h1 className="text-3xl font-bold mb-6">Quản lý đơn hàng</h1>
 
       {/* Filter */}
