@@ -9,6 +9,22 @@ import { Textarea } from '../components/ui/textarea';
 import { ShoppingCart, Star, Minus, Plus, ArrowLeft } from 'lucide-react';
 import { toast } from 'sonner';
 
+const TEXT = {
+  notFound: "Không tìm thấy sản phẩm",
+  back: "Quay lại",
+  addToCart: "Thêm vào giỏ hàng",
+  buyNow: "Mua ngay",
+  description: "Mô tả sản phẩm",
+  stock: "Còn lại",
+  sold: "Đã bán",
+  quantity: "Số lượng",
+  reviewTitle: "Đánh giá sản phẩm",
+  writeReview: "Viết đánh giá của bạn",
+  rating: "Đánh giá",
+  comment: "Nhận xét",
+  submit: "Gửi đánh giá",
+  noReview: "Chưa có đánh giá nào",
+};
 export function ProductDetail() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
