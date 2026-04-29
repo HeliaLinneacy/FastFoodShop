@@ -128,7 +128,7 @@ export function AdminProducts() {
           className="bg-orange-500 hover:bg-orange-600"
         >
           <Plus className="mr-2 h-4 w-4" />
-          Thêm sản phẩm
+          {TEXT.add}
         </Button>
       </div>
 
