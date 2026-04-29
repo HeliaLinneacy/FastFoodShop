@@ -220,7 +220,7 @@ const reviews = useMemo(() => {
               <form onSubmit={handleSubmitReview}>
                 <div className="mb-4">
                   <label className="block text-sm font-medium mb-2">
-                    Đánh giá
+                    {TEXT.rating}
                   </label>
                   <div className="flex gap-2">
                     {[1, 2, 3, 4, 5].map(star => (
