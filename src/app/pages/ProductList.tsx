@@ -107,7 +107,7 @@ export function ProductList() {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">{TEXT.allCategory}</SelectItem>
-              {categories.map(cat => (
+              {categories.length > 0 ? categories.map((cat) => (
                 <SelectItem key={cat.id} value={cat.id}>
                   {cat.name}
                 </SelectItem>
