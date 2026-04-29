@@ -154,7 +154,7 @@ const reviews = useMemo(() => {
 
           <div className="grid grid-cols-2 gap-4 mb-6 text-sm">
             <div>
-              <span className="text-gray-500">Còn lại:</span>
+              <span className="text-gray-500">{TEXT.stock}:</span>
               <span className="ml-2 font-medium">{product.stock} sản phẩm</span>
             </div>
             <div>
