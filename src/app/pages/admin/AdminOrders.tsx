@@ -61,7 +61,7 @@ export function AdminOrders() {
       <div className="mb-6 max-w-xs">
         <Select value={filterStatus} onValueChange={setFilterStatus}>
           <SelectTrigger>
-            <SelectValue placeholder="Lọc theo trạng thái" />
+            <SelectValue placeholder={TEXT.filterPlaceholder} />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="all">Tất cả đơn hàng</SelectItem>
