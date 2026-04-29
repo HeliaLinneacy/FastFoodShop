@@ -23,7 +23,12 @@ export function AdminProducts() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
-
+  const TEXT = {
+    title: 'Quản lý sản phẩm',
+    add: 'Thêm sản phẩm',
+    search: 'Tìm kiếm sản phẩm...',
+    noData: 'Không có sản phẩm',
+  };
   const [formData, setFormData] = useState({
     name: '',
     description: '',
