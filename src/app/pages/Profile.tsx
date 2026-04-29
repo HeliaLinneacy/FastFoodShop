@@ -7,6 +7,15 @@ import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 import { toast } from 'sonner';
 
+const TEXT = {
+  login: "Vui lòng đăng nhập",
+  loginBtn: "Đăng nhập",
+  title: "Hồ sơ của tôi",
+  personal: "Thông tin cá nhân",
+  account: "Thông tin tài khoản",
+  update: "Cập nhật",
+  cancel: "Hủy",
+};
 export function Profile() {
   const navigate = useNavigate();
   const { currentUser, updateProfile } = useAuth();
