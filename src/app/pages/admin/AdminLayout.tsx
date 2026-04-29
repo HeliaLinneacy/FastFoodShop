@@ -4,6 +4,14 @@ import { useAuth } from '../../contexts/AuthContext';
 import { Button } from '../../components/ui/button';
 import { LayoutDashboard, Package, Tag, ShoppingBag, Users, BarChart3 } from 'lucide-react';
 
+const TEXT = {
+  noAccess: 'Không có quyền truy cập',
+  noAccessDesc: 'Bạn không có quyền truy cập trang quản trị',
+  goHome: 'Về trang chủ',
+  title: 'Quản trị viên',
+};
+
+const containerClass = 'container mx-auto px-4';
 export function AdminLayout() {
   const navigate = useNavigate();
   const location = useLocation();
