@@ -84,7 +84,7 @@ export function ProductList() {
 
   return (
     <div className={`${containerClass} py-8`}>
-      <h1 className="text-3xl font-bold mb-8">Sản phẩm</h1>
+      <h1 className="text-3xl font-bold mb-8">{TEXT.title}</h1>
 
       {/* Filters */}
       <div className="bg-white rounded-lg border p-4 mb-6">
