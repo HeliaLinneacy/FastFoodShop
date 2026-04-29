@@ -51,7 +51,7 @@ export function AdminOrders() {
     if (selectedOrder?.id === orderId) {
       setSelectedOrder({ ...selectedOrder, status: newStatus });
     }
-  };
+  }, [updateOrder, selectedOrder]);
 
   return (
     <div>
