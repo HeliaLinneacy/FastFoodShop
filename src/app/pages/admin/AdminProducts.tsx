@@ -66,7 +66,7 @@ export function AdminProducts() {
       stock: product.stock.toString(),
     });
     setIsDialogOpen(true);
-  };
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
