@@ -55,7 +55,7 @@ export function AdminProducts() {
       [field]: value,
     }));
   }, []);
-  const handleEdit = useCallback((product: Product) => {
+  const handleSubmit = useCallback((e: React.FormEvent) => {
     setEditingProduct(product);
     setFormData({
       name: product.name,
@@ -66,7 +66,7 @@ export function AdminProducts() {
       stock: product.stock.toString(),
     });
     setIsDialogOpen(true);
-  }, []);
+  }, [formData, editingProduct]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
