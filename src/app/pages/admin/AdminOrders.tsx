@@ -41,7 +41,7 @@ export function AdminOrders() {
     }).format(price);
   };
 
-  const formatDate = (date: string) => {
+  const formatDate = useCallback((date: string) => {
     return new Date(date).toLocaleString('vi-VN');
   };
 
