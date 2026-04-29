@@ -19,7 +19,7 @@ export function AdminLayout() {
 
   if (!isAdmin) {
     return (
-      <div className="container mx-auto px-4 py-12">
+      <div className={`${containerClass} py-12`}>
         <div className="max-w-md mx-auto text-center">
           <h2 className="text-2xl font-bold mb-4">Không có quyền truy cập</h2>
           <p className="text-gray-600 mb-6">
