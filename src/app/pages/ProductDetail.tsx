@@ -202,7 +202,7 @@ const reviews = useMemo(() => {
               className="flex-1 bg-red-500 hover:bg-red-600"
               size="lg"
             >
-              Mua ngay
+              {TEXT.buyNow}
             </Button>
           </div>
         </div>
