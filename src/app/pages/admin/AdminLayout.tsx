@@ -26,7 +26,7 @@ export function AdminLayout() {
             {TEXT.noAccessDesc}
           </p>
           <Button onClick={goHome} className="bg-orange-500 hover:bg-orange-600">
-            Về trang chủ
+            {TEXT.goHome}
           </Button>
         </div>
       </div>
