@@ -132,7 +132,7 @@ export function ProductList() {
 
       {/* Results */}
       <div className="mb-4 text-gray-600">
-        Tìm thấy {filteredProducts.length} sản phẩm
+        {TEXT.result} {filteredProducts.length} sản phẩm
       </div>
 
       {/* Products Grid */}
