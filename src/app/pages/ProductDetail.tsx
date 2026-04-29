@@ -108,7 +108,7 @@ const reviews = useMemo(() => {
         className="mb-6"
       >
         <ArrowLeft className="mr-2 h-4 w-4" />
-        Quay lại
+        {TEXT.back}
       </Button>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
