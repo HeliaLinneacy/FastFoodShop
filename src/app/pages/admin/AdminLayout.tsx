@@ -23,7 +23,7 @@ export function AdminLayout() {
         <div className="max-w-md mx-auto text-center">
           <h2 className="text-2xl font-bold mb-4">{TEXT.noAccess}</h2>
           <p className="text-gray-600 mb-6">
-            Bạn không có quyền truy cập trang quản trị
+            {TEXT.noAccessDesc}
           </p>
           <Button onClick={() => navigate('/')} className="bg-orange-500 hover:bg-orange-600">
             Về trang chủ
