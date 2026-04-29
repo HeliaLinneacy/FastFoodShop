@@ -34,38 +34,38 @@ export function ProductList() {
 
   // Filter and sort products
   const filteredProducts = useMemo(() => {
-    let filtered = products;
+    if (!products.length) return [];
 
-    // Filter by search query
-    if (searchQuery) {
-      filtered = filtered.filter(p =>
-        p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        p.description.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-    }
+  const query = searchQuery.toLowerCase();
 
-    // Filter by category
-    if (selectedCategory !== 'all') {
-      filtered = filtered.filter(p => p.categoryId === selectedCategory);
-    }
+  let filtered = products;
 
-    // Sort
-    const sorted = [...filtered].sort((a, b) => {
-      switch (sortBy) {
-        case 'price-asc':
-          return a.price - b.price;
-        case 'price-desc':
-          return b.price - a.price;
-        case 'rating':
-          return b.rating - a.rating;
-        case 'sold':
-          return b.sold - a.sold;
-        default:
-          return a.name.localeCompare(b.name);
-      }
+  if (query) {
+    filtered = products.filter((p) => {
+      const name = p.name.toLowerCase();
+      const desc = p.description.toLowerCase();
+      return name.includes(query) || desc.includes(query);
     });
+  }
 
-    return sorted;
+  if (selectedCategory !== 'all') {
+    filtered = filtered.filter((p) => p.categoryId === selectedCategory);
+  }
+
+  return [...filtered].sort((a, b) => {
+    switch (sortBy) {
+      case 'price-asc':
+        return a.price - b.price;
+      case 'price-desc':
+        return b.price - a.price;
+      case 'rating':
+        return b.rating - a.rating;
+      case 'sold':
+        return b.sold - a.sold;
+      default:
+        return a.name.localeCompare(b.name);
+    }
+  });
   }, [products, searchQuery, selectedCategory, sortBy]);
 
   const handleCategoryChange = (value: string) => {
