@@ -115,7 +115,7 @@ const reviews = useMemo(() => {
         {/* Image */}
         <div className="aspect-square rounded-lg overflow-hidden bg-gray-100">
           <img
-            src={product.image}
+            src={product.image || '/placeholder.png'}
             alt={product.name}
             className="w-full h-full object-cover"
           />
