@@ -119,7 +119,7 @@ export function AdminProducts() {
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-3xl font-bold">Quản lý sản phẩm</h1>
+        <h1 className="text-3xl font-bold">{TEXT.title}</h1>
         <Button
           onClick={() => {
             resetForm();
