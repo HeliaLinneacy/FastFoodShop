@@ -252,7 +252,7 @@ const reviews = useMemo(() => {
                     rows={4}
                   />
                 </div>
-                <Button type="submit">Gửi đánh giá</Button>
+                <Button type="submit">{TEXT.submit}</Button>
               </form>
             </CardContent>
           </Card>
