@@ -148,7 +148,7 @@ const reviews = useMemo(() => {
           </div>
 
           <div className="mb-6">
-            <h3 className="font-semibold mb-2">Mô tả sản phẩm</h3>
+            <h3 className="font-semibold mb-2">{TEXT.description}</h3>
             <p className="text-gray-600">{product.description}</p>
           </div>
 
