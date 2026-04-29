@@ -216,7 +216,7 @@ const reviews = useMemo(() => {
         {currentUser && (
           <Card className="mb-6">
             <CardContent className="p-6">
-              <h3 className="font-semibold mb-4">Viết đánh giá của bạn</h3>
+              <h3 className="font-semibold mb-4">{TEXT.writeReview}</h3>
               <form onSubmit={handleSubmitReview}>
                 <div className="mb-4">
                   <label className="block text-sm font-medium mb-2">
