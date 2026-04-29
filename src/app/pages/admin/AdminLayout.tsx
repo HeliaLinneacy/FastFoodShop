@@ -57,8 +57,8 @@ export function AdminLayout() {
                   <Button
                     variant={isActive ? 'default' : 'ghost'}
                     className={`w-full justify-start transition-colors ${
-                    isActive ? 'bg-orange-500 hover:bg-orange-600 text-white' : ''
-                  }`}
+                      isActive ? 'bg-orange-500 hover:bg-orange-600 text-white' : ''
+                    }`}
                   >
                     <Icon className="mr-2 h-4 w-4" />
                     {item.label}
@@ -71,7 +71,7 @@ export function AdminLayout() {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 p-8">
+      <main className="flex-1 p-8 bg-gray-50">
         <Outlet />
       </main>
     </div>
