@@ -46,7 +46,7 @@ export function AdminLayout() {
       {/* Sidebar */}
       <aside className="w-64 bg-gray-50 border-r">
         <div className="p-6">
-          <h2 className="text-xl font-bold mb-6">Quản trị viên</h2>
+          <h2 className="text-xl font-bold mb-6">{TEXT.title}</h2>
           <nav className="space-y-2">
             {menuItems.map(item => {
               const Icon = item.icon;
