@@ -54,7 +54,7 @@ const reviews = useMemo(() => {
     return (
       <div className={`${containerClass} py-12 text-center`}>
         <p className="text-gray-500">{TEXT.notFound}</p>
-        <Button onClick={() => navigate('/products')} className="mt-4">
+        <Button onClick={goProducts} className="mt-4">
           Quay lại danh sách
         </Button>
       </div>
