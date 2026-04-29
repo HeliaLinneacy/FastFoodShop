@@ -194,7 +194,7 @@ const reviews = useMemo(() => {
               size="lg"
             >
               <ShoppingCart className="mr-2 h-5 w-5" />
-              Thêm vào giỏ hàng
+              {TEXT.addToCart}
             </Button>
             <Button
               onClick={handleBuyNow}
