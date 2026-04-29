@@ -55,7 +55,7 @@ export function AdminProducts() {
       [field]: value,
     }));
   }, []);
-  const handleEdit = (product: Product) => {
+  const handleEdit = useCallback((product: Product) => {
     setEditingProduct(product);
     setFormData({
       name: product.name,
