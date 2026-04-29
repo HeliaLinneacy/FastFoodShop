@@ -55,7 +55,7 @@ export function AdminOrders() {
 
   return (
     <div className={`${containerClass} py-8`}>
-      <h1 className="text-3xl font-bold mb-6">Quản lý đơn hàng</h1>
+      <h1 className="text-3xl font-bold mb-6">{TEXT.title}</h1>
 
       {/* Filter */}
       <div className="mb-6 max-w-xs">
