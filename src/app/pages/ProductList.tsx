@@ -8,6 +8,20 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Button } from '../components/ui/button';
 import { Search, SlidersHorizontal } from 'lucide-react';
 
+const TEXT = {
+  title: "Sản phẩm",
+  searchPlaceholder: "Tìm kiếm sản phẩm...",
+  allCategory: "Tất cả danh mục",
+  sortName: "Tên A-Z",
+  sortPriceAsc: "Giá thấp đến cao",
+  sortPriceDesc: "Giá cao đến thấp",
+  sortRating: "Đánh giá cao nhất",
+  sortSold: "Bán chạy nhất",
+  result: "Tìm thấy",
+  noResult: "Không tìm thấy sản phẩm nào",
+};
+
+const containerClass = "container mx-auto px-4";
 export function ProductList() {
   const [searchParams, setSearchParams] = useSearchParams();
   const { products = [], categories = [] } = useData();
