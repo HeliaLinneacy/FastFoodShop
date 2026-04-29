@@ -45,7 +45,7 @@ export function AdminOrders() {
     return new Date(date).toLocaleString('vi-VN');
   };
 
-  const handleStatusChange = (orderId: string, newStatus: OrderStatus) => {
+  const handleStatusChange = useCallback((orderId: string, newStatus: OrderStatus) => {
     updateOrder(orderId, { status: newStatus });
     toast.success('Đã cập nhật trạng thái đơn hàng');
     if (selectedOrder?.id === orderId) {
