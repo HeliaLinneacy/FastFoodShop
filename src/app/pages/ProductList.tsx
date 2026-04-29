@@ -121,7 +121,7 @@ export function ProductList() {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="name">{TEXT.sortName}</SelectItem>
-              <SelectItem value="price-asc">Giá thấp đến cao</SelectItem>
+              <SelectItem value="price-asc">{TEXT.sortPriceAsc}</SelectItem>
               <SelectItem value="price-desc">Giá cao đến thấp</SelectItem>
               <SelectItem value="rating">Đánh giá cao nhất</SelectItem>
               <SelectItem value="sold">Bán chạy nhất</SelectItem>
