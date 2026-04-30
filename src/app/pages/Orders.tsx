@@ -25,12 +25,12 @@ export function Orders() {
     return (
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-md mx-auto text-center">
-          <h2 className="text-2xl font-bold mb-4">{TEXT.loginRequired}</h2>
+          <h2 className="text-2xl font-bold mb-4">Vui lòng đăng nhập</h2>
           <p className="text-gray-600 mb-6">
-            {TEXT.loginDesc}
+           Bạn cần đăng nhập để xem đơn hàng
           </p>
           <Button onClick={() => navigate('/login')} className="bg-orange-500 hover:bg-orange-600">
-            {TEXT.loginBtn}
+            Đăng nhập
           </Button>
         </div>
       </div>
@@ -63,15 +63,15 @@ export function Orders() {
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-md mx-auto text-center">
           <Package className="h-24 w-24 mx-auto text-gray-300 mb-4" />
-          <h2 className="text-2xl font-bold mb-2">{TEXT.emptyTitle}</h2>
+          <h2 className="text-2xl font-bold mb-2">Chưa có đơn hàng nào</h2>
           <p className="text-gray-600 mb-6">
-            {TEXT.emptyDesc}
+           Bạn chưa có đơn hàng nào. Hãy bắt đầu mua sắm!
           </p>
           <Button
             onClick={() => navigate('/products')}
             className="bg-orange-500 hover:bg-orange-600"
           >
-            {TEXT.shopNow}
+            Mua sắm ngay
           </Button>
         </div>
       </div>
@@ -80,7 +80,7 @@ export function Orders() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8">{TEXT.myOrders}</h1>
+      <h1 className="text-3xl font-bold mb-8">Đơn hàng của tôi</h1>
 
       <div className="space-y-4">
         {orders.map(order => (
@@ -97,7 +97,7 @@ export function Orders() {
                   </div>
                 </div>
                 <div className="text-right">
-                  <div className="text-sm text-gray-600 mb-1">{TEXT.total}</div>
+                  <div className="text-sm text-gray-600 mb-1">Tổng tiền</div>
                   <div className="text-lg font-bold text-orange-500">
                     {formatPrice(order.total)}
                   </div>
