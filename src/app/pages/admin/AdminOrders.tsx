@@ -73,8 +73,8 @@ export function AdminOrders() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {filteredOrders.length > 0 ? filteredOrders.map((order) => (
-                <TableRow key={order.id ?? order.createdAt}>
+              {filteredOrders.map(order => (
+                <TableRow key={order.id}>
                   <TableCell className="font-medium">#{order.id}</TableCell>
                   <TableCell>
                     <div>{order.customerName}</div>
@@ -97,13 +97,7 @@ export function AdminOrders() {
                     </Button>
                   </TableCell>
                 </TableRow>
-              )) : (
-                <TableRow>
-                  <TableCell colSpan={6} className="text-center py-6 text-gray-500">
-                    Không có đơn hàng
-                  </TableCell>
-                </TableRow>
-              )}
+              ))}
             </TableBody>
           </Table>
         </CardContent>
