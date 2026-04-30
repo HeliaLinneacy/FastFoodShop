@@ -9,22 +9,6 @@ import { Textarea } from '../components/ui/textarea';
 import { ShoppingCart, Star, Minus, Plus, ArrowLeft } from 'lucide-react';
 import { toast } from 'sonner';
 
-const TEXT = {
-  notFound: "Không tìm thấy sản phẩm",
-  back: "Quay lại",
-  addToCart: "Thêm vào giỏ hàng",
-  buyNow: "Mua ngay",
-  description: "Mô tả sản phẩm",
-  stock: "Còn lại",
-  sold: "Đã bán",
-  quantity: "Số lượng",
-  reviewTitle: "Đánh giá sản phẩm",
-  writeReview: "Viết đánh giá của bạn",
-  rating: "Đánh giá",
-  comment: "Nhận xét",
-  submit: "Gửi đánh giá",
-  noReview: "Chưa có đánh giá nào",
-};
 export function ProductDetail() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -48,9 +32,9 @@ const reviews = useMemo(() => {
   if (!product) {
     return (
       <div className="container mx-auto px-4 py-12 text-center">
-        <p className="text-gray-500">{TEXT.notFound}</p>
+        <p className="text-gray-500">Không tìm thấy sản phẩm</p>
           <Button onClick={() => navigate('/products')} className="mt-4">
-            {TEXT.back}
+            Quay lại
           </Button>
       </div>
     );
@@ -103,7 +87,7 @@ const reviews = useMemo(() => {
         className="mb-6"
       >
         <ArrowLeft className="mr-2 h-4 w-4" />
-        {TEXT.back}
+        Quay lại
       </Button>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
@@ -143,24 +127,24 @@ const reviews = useMemo(() => {
           </div>
 
           <div className="mb-6">
-            <h3 className="font-semibold mb-2">{TEXT.description}</h3>
+            <h3 className="font-semibold mb-2">Mô tả sản phẩm</h3>
             <p className="text-gray-600">{product.description}</p>
           </div>
 
           <div className="grid grid-cols-2 gap-4 mb-6 text-sm">
             <div>
-              <span className="text-gray-500">{TEXT.stock}:</span>
+              <span className="text-gray-500">Còn lại:</span>
               <span className="ml-2 font-medium">{product.stock} sản phẩm</span>
             </div>
             <div>
-              <span className="text-gray-500">{TEXT.sold}:</span>
+              <span className="text-gray-500">Đã bán:</span>
               <span className="ml-2 font-medium">{product.sold}</span>
             </div>
           </div>
 
           {/* Quantity */}
           <div className="flex items-center gap-4 mb-6">
-            <span className="font-medium">{TEXT.quantity}:</span>
+            <span className="font-medium">Số lượng:</span>
             <div className="flex items-center border rounded-lg">
               <Button
                 variant="ghost"
@@ -189,7 +173,7 @@ const reviews = useMemo(() => {
               size="lg"
             >
               <ShoppingCart className="mr-2 h-5 w-5" />
-              {TEXT.addToCart}
+              Thêm vào giỏ hàng
             </Button>
             <Button
               onClick={handleBuyNow}
@@ -197,7 +181,7 @@ const reviews = useMemo(() => {
               className="flex-1 bg-red-500 hover:bg-red-600"
               size="lg"
             >
-              {TEXT.buyNow}
+              Mua ngay
             </Button>
           </div>
         </div>
@@ -215,7 +199,7 @@ const reviews = useMemo(() => {
               <form onSubmit={handleSubmitReview}>
                 <div className="mb-4">
                   <label className="block text-sm font-medium mb-2">
-                    {TEXT.rating}
+                    Đánh giá
                   </label>
                   <div className="flex gap-2">
                     {[1, 2, 3, 4, 5].map(star => (
@@ -237,7 +221,7 @@ const reviews = useMemo(() => {
                 </div>
                 <div className="mb-4">
                   <label className="block text-sm font-medium mb-2">
-                    {TEXT.comment}
+                    Nhận xét
                   </label>
                   <Textarea
                     value={comment}
@@ -247,7 +231,7 @@ const reviews = useMemo(() => {
                     rows={4}
                   />
                 </div>
-                <Button type="submit">{TEXT.submit}</Button>
+                <Button type="submit">Gửi đánh giá</Button>
               </form>
             </CardContent>
           </Card>
@@ -285,7 +269,7 @@ const reviews = useMemo(() => {
             ))
           ) : (
             <p className="text-center text-gray-500 py-8">
-              {TEXT.noReview}
+              Chưa có đánh giá nào
             </p>
           )}
         </div>
