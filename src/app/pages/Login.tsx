@@ -79,10 +79,7 @@ export function Login() {
 
           <div className="mt-6 text-center text-sm">
             <span className="text-gray-600">Chưa có tài khoản? </span>
-            <Link
-              to="/register"
-              className="text-orange-500 hover:underline font-medium"
-            >
+            <Link to="/register" className="text-orange-500 hover:underline font-medium">
               Đăng ký ngay
             </Link>
           </div>
