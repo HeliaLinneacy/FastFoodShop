@@ -118,12 +118,7 @@ const formatPrice = (price: number) =>
                     <Input
                       id="fullName"
                       value={formData.fullName}
-                      const handleChange = (field: string, value: string) => {
-                      setFormData({
-                        ...formData,
-                        [field]: value,
-                      });
-                    };
+                      onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                       required
                     />
                   </div>
