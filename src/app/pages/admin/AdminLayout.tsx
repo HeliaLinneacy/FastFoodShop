@@ -47,8 +47,8 @@ export function AdminLayout() {
                 <Link key={item.path} to={item.path}>
                   <Button
                     variant={isActive ? 'default' : 'ghost'}
-                    className={`w-full justify-start transition-colors ${
-                      isActive ? 'bg-orange-500 hover:bg-orange-600 text-white' : ''
+                    className={`w-full justify-start ${
+                      isActive ? 'bg-orange-500 hover:bg-orange-600' : ''
                     }`}
                   >
                     <Icon className="mr-2 h-4 w-4" />
