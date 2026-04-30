@@ -41,14 +41,14 @@ export function Orders() {
     (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
   );
 
-  const formatPrice = useCallback((price: number) => {
+  const formatPrice = (price: number) => {
     return new Intl.NumberFormat('vi-VN', {
       style: 'currency',
       currency: 'VND',
     }).format(price);
   };
 
-  const formatDate = useCallback((date: string) => {
+  const formatDate = (date: string) => {
     return new Date(date).toLocaleString('vi-VN', {
       year: 'numeric',
       month: '2-digit',
