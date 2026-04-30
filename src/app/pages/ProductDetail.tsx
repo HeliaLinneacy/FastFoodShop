@@ -94,7 +94,7 @@ const reviews = useMemo(() => {
         {/* Image */}
         <div className="aspect-square rounded-lg overflow-hidden bg-gray-100">
           <img
-            src={product.image || '/placeholder.png'}
+            src={product.image}
             alt={product.name}
             className="w-full h-full object-cover"
           />
@@ -241,7 +241,7 @@ const reviews = useMemo(() => {
         <div className="space-y-4">
           {reviews.length > 0 ? (
             reviews.map(review => (
-              <Card key={review.id ?? review.createdAt}>
+              <Card key={review.id}>
                 <CardContent className="p-6">
                   <div className="flex items-start justify-between mb-2">
                     <div>
