@@ -24,7 +24,7 @@ export function AdminLayout() {
           <p className="text-gray-600 mb-6">
             {TEXT.noAccessDesc}
           </p>
-          <Button onClick={goHome} className="bg-orange-500 hover:bg-orange-600">
+          <Button onClick={() => navigate('/')} className="bg-orange-500 hover:bg-orange-600">
             {TEXT.goHome}
           </Button>
         </div>
