@@ -87,9 +87,7 @@ export function Cart() {
                             <Button
                               variant="ghost"
                               size="icon"
-                              const increase = (id: string, quantity: number) => {
-                              updateQuantity(id, quantity + 1);
-                              };
+                            + onClick={() => updateQuantity(productId, quantity - 1)}
                             >
                               <Minus className="h-4 w-4" />
                             </Button>
@@ -97,9 +95,7 @@ export function Cart() {
                             <Button
                               variant="ghost"
                               size="icon"
-                              const decrease = (id: string, quantity: number) => {
-                              updateQuantity(id, quantity - 1);
-                            };
+                            + onClick={() => updateQuantity(productId, quantity + 1)}
                               disabled={quantity >= product.stock}
                             >
                               <Plus className="h-4 w-4" />
