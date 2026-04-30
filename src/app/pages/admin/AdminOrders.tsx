@@ -26,18 +26,18 @@ export function AdminOrders() {
     .filter(o => filterStatus === 'all' || o.status === filterStatus)
     .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
   
-  const formatPrice = useCallback((price: number) => {
+  const formatPrice = (price: number) => {
     return new Intl.NumberFormat('vi-VN', {
       style: 'currency',
       currency: 'VND',
     }).format(price);
   };
 
-  const formatDate = useCallback((date: string) => {
+  const formatDate = (date: string) => {
     return new Date(date).toLocaleString('vi-VN');
   };
 
-  const handleStatusChange = useCallback((orderId: string, newStatus: OrderStatus) => {
+  const handleStatusChange = (orderId: string, newStatus: OrderStatus) => {
     updateOrder(orderId, { status: newStatus });
     toast.success('Đã cập nhật trạng thái đơn hàng');
     if (selectedOrder?.id === orderId) {
