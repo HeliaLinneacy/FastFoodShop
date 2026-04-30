@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react';
+import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router';
 import { useData } from '../contexts/DataContext';
 import { useAuth } from '../contexts/AuthContext';
@@ -35,12 +35,7 @@ export function ProductDetail() {
   const [quantity, setQuantity] = useState(1);
   const [rating, setRating] = useState(5);
   const [comment, setComment] = useState('');
-
-  const product = useMemo(() => {
-  if (!id) return null;
-  return getProductById(id);
-}, [id, getProductById]);
-
+  const product = getProductById(id!);
 const category = useMemo(() => {
   if (!product) return null;
   return getCategoryById(product.categoryId);
@@ -61,7 +56,7 @@ const reviews = useMemo(() => {
     );
   }
 
-  const formatPrice = useCallback((price: number) => {
+  const formatPrice = (price: number) => {
     return new Intl.NumberFormat('vi-VN', {
       style: 'currency',
       currency: 'VND',
