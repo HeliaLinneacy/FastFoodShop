@@ -107,7 +107,7 @@ export function AdminOrders() {
       <Dialog open={!!selectedOrder} onOpenChange={() => setSelectedOrder(null)}>
         <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle>{`Chi tiết đơn hàng #${selectedOrder?.id || ''}`}</DialogTitle>
+            <DialogTitle>Chi tiết đơn hàng #{selectedOrder?.id}</DialogTitle>
           </DialogHeader>
           {selectedOrder && (
             <div className="space-y-6">
