@@ -7,7 +7,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Button } from '../components/ui/button';
 import { Search, SlidersHorizontal } from 'lucide-react';
 
-const containerClass = "container mx-auto px-4";
 export function ProductList() {
   const [searchParams, setSearchParams] = useSearchParams();
   const { products = [], categories = [] } = useData();
@@ -69,7 +68,7 @@ export function ProductList() {
 }, [searchParams, setSearchParams]);
 
   return (
-    <div className={`${containerClass} py-8`}>
+    <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-8">Sản phẩm</h1>
 
       {/* Filters */}
