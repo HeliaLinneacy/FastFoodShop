@@ -3,7 +3,6 @@ import { useAuth } from '../../contexts/AuthContext';
 import { Button } from '../../components/ui/button';
 import { LayoutDashboard, Package, Tag, ShoppingBag, Users, BarChart3 } from 'lucide-react';
 
-const containerClass = 'container mx-auto px-4';
 export function AdminLayout() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -11,7 +10,7 @@ export function AdminLayout() {
 
   if (!isAdmin) {
     return (
-      <div className={`${containerClass} py-12`}>
+      <div className="container mx-auto px-4 py-12">
         <div className="max-w-md mx-auto text-center">
           <h2 className="text-2xl font-bold mb-4">Không có quyền truy cập</h2>
           <p className="text-gray-600 mb-6">
