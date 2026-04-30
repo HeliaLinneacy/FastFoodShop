@@ -1,5 +1,4 @@
-import { useNavigate } from 'react-router-dom';
-import { useMemo, useCallback } from 'react';
+import { useNavigate } from 'react-router';
 import { useAuth } from '../contexts/AuthContext';
 import { useData } from '../contexts/DataContext';
 import { Card, CardContent } from '../components/ui/card';
