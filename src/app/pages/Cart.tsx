@@ -18,12 +18,13 @@ export function Cart() {
 
   const total = getCartTotal(products);
 
- const formatPrice = (price: number) =>
-  new Intl.NumberFormat('vi-VN', {
-    style: 'currency',
-    currency: 'VND',
-  }).format(price);
-
+  const formatPrice = (price: number) => {
+    return new Intl.NumberFormat('vi-VN', {
+      style: 'currency',
+      currency: 'VND',
+    }).format(price);
+  };
+  
   const handleRemove = (productId: string, productName: string) => {
     removeFromCart(productId);
     toast.success(`Đã xóa ${productName} khỏi giỏ hàng`);
