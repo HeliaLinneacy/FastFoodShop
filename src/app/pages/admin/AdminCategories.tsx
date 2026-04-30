@@ -110,7 +110,7 @@ export function AdminCategories() {
               </TableRow>
             </TableHeader>
             <TableBody>
-             {categories.length > 0 ? categories.map((category) => {
+             {categories.map(category) => {
                 const productCount = products.filter(p => p.categoryId === category.id).length;
                 return (
                   <TableRow key={category.id ?? category.slug}>
