@@ -11,20 +11,6 @@ export function Profile() {
   const navigate = useNavigate();
   const { currentUser, updateProfile } = useAuth();
 
-  // ===== CONSTANTS =====
-  const TEXT = {
-    login: "Vui lòng đăng nhập",
-    loginBtn: "Đăng nhập",
-    title: "Hồ sơ của tôi",
-    personal: "Thông tin cá nhân",
-    account: "Thông tin tài khoản",
-    update: "Cập nhật",
-    cancel: "Hủy",
-  };
-
-  const containerClass = "container mx-auto px-4";
-
-  // ===== STATE =====
   const [formData, setFormData] = useState({
     fullName: currentUser?.fullName || '',
     phone: currentUser?.phone || '',
@@ -42,28 +28,32 @@ export function Profile() {
     return (
       <div className={`${containerClass} py-12`}>
         <div className="max-w-md mx-auto text-center">
-          <h2 className="text-2xl font-bold mb-4">{TEXT.login}</h2>
+          <h2 className="text-2xl font-bold mb-4">Vui lòng đăng nhập</h2>
           <Button
             onClick={goLogin}
             className="bg-orange-500 hover:bg-orange-600"
           >
-            {TEXT.loginBtn}
+            Đăng nhập
           </Button>
         </div>
       </div>
     );
   }
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    updateProfile(currentUser.id, formData);
+    toast.success('Cập nhật hồ sơ thành công!');
+  };
 
-  // ===== MAIN =====
   return (
     <div className={`${containerClass} py-8`}>
-      <h1 className="text-3xl font-bold mb-8">{TEXT.title}</h1>
+      <h1 className="text-3xl font-bold mb-8">Hồ sơ của tôi</h1>
 
       <div className="max-w-2xl">
         {/* PERSONAL INFO */}
         <Card>
           <CardHeader>
-            <h3 className="text-lg font-semibold">{TEXT.personal}</h3>
+            <h3 className="text-lg font-semibold">Thông tin cá nhân</h3>
           </CardHeader>
 
           <CardContent>
@@ -129,7 +119,7 @@ export function Profile() {
                   type="submit"
                   className="bg-orange-500 hover:bg-orange-600"
                 >
-                  {TEXT.update}
+                  Cập nhật
                 </Button>
 
                 <Button
@@ -137,7 +127,7 @@ export function Profile() {
                   variant="outline"
                   onClick={goBack}
                 >
-                  {TEXT.cancel}
+                  Hủy
                 </Button>
               </div>
             </form>
@@ -147,7 +137,7 @@ export function Profile() {
         {/* ACCOUNT INFO */}
         <Card className="mt-6">
           <CardHeader>
-            <h3 className="text-lg font-semibold">{TEXT.account}</h3>
+            <h3 className="text-lg font-semibold">Thông tin tài khoản</h3>
           </CardHeader>
 
           <CardContent className="space-y-2 text-sm">
