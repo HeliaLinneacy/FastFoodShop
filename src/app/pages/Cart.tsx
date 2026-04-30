@@ -128,8 +128,8 @@ export function Cart() {
               
               <div className="space-y-3 mb-6">
                 <div className="flex justify-between">
-                  <span>Tạm tính:</span>
-                  <span>{formatPrice(total)}</span>
+                  <span className="text-gray-600">Tạm tính:</span>
+                  <span className="font-medium">{formatPrice(total)}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">Phí vận chuyển:</span>
