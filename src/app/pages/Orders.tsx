@@ -91,7 +91,7 @@ export function Orders() {
 
       <div className="space-y-4">
         {orders.map(order => (
-          <Card key={order.id ?? order.createdAt}>
+          <Card key={order.id}>
             <CardContent className="p-6">
               <div className="flex items-start justify-between mb-4">
                 <div>
@@ -114,7 +114,7 @@ export function Orders() {
               <div className="border-t pt-4">
                 <div className="space-y-3">
                   {order.items.map(item => (
-                    <div key={item.id ?? item.productName} className="flex gap-3">
+                    <div key={item.id} className="flex gap-3">
                       <img
                         src={item.productImage || '/placeholder.png'}
                         alt={item.productName}
