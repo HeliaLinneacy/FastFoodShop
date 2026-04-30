@@ -104,7 +104,7 @@ export function AdminProducts() {
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-3xl font-bold">{TEXT.title}</h1>
+        <h1 className="text-3xl font-bold">Quản lý sản phẩm</h1>
         <Button
           onClick={() => {
             resetForm();
@@ -113,7 +113,7 @@ export function AdminProducts() {
           className="bg-orange-500 hover:bg-orange-600"
         >
           <Plus className="mr-2 h-4 w-4" />
-          {TEXT.add}
+          Thêm sản phẩm
         </Button>
       </div>
 
@@ -121,7 +121,7 @@ export function AdminProducts() {
       <div className="mb-6 relative max-w-md">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
         <Input
-          placeholder={TEXT.search}
+          placeholder="Tìm kiếm sản phẩm..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className="pl-10"
@@ -145,7 +145,7 @@ export function AdminProducts() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {filteredProducts.length > 0 ? filteredProducts.map((product) => {
+              {filteredProducts.map(product => {
                 const category = categories.find(c => c.id === product.categoryId);
                 return (
                   <TableRow key={product.id}>
@@ -182,13 +182,7 @@ export function AdminProducts() {
                     </TableCell>
                   </TableRow>
                 );
-              }) : (
-                <TableRow>
-                  <TableCell colSpan={8} className="text-center py-6 text-gray-500">
-                    {TEXT.noData}
-                  </TableCell>
-                </TableRow>
-              )}
+              })}
             </TableBody>
           </Table>
         </CardContent>
