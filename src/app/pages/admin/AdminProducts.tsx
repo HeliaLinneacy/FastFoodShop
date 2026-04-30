@@ -13,13 +13,7 @@ import { Product } from '../../types';
 import { toast } from 'sonner';
 
 export function AdminProducts() {
-  const {
-  products = [],
-  categories = [],
-  addProduct,
-  updateProduct,
-  deleteProduct,
-} = useData();
+  const { products, categories, addProduct, updateProduct, deleteProduct } = useData();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
