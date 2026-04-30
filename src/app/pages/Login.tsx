@@ -10,13 +10,10 @@ import { toast } from 'sonner';
 export function Login() {
   const navigate = useNavigate();
   const { login } = useAuth();
-
-  // State lưu thông tin form đăng nhập
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
-// Xử lý submit form
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -34,13 +31,11 @@ export function Login() {
       <Card className="w-full max-w-md">
         
         <CardHeader className="space-y-4">
-          {/* Logo */}
           <div className="flex justify-center">
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-orange-500">
               <Package className="h-7 w-7 text-white" />
             </div>
           </div>
-{/* Title */}
           <div className="text-center">
             <h1 className="text-2xl font-bold">Đăng nhập</h1>
             <p className="text-gray-600 mt-2">
@@ -50,10 +45,8 @@ export function Login() {
         </CardHeader>
 
         <CardContent>
-          {/* Form đăng nhập */}
           <form onSubmit={handleSubmit} className="space-y-4">
             
-            {/* Email */}
             <div>
               <Label htmlFor="email">Email</Label>
               <Input
@@ -71,7 +64,7 @@ export function Login() {
                 required
               />
             </div>
-{/* Password */}
+
             <div>
               <Label htmlFor="password">Mật khẩu</Label>
               <Input
@@ -89,7 +82,6 @@ export function Login() {
                 required
               />
             </div>
- {/* Submit */}
             <Button
               type="submit"
               className="w-full bg-orange-500 hover:bg-orange-600"
@@ -99,7 +91,6 @@ export function Login() {
             </Button>
           </form>
 
-          {/* Register link */}
           <div className="mt-6 text-center text-sm">
             <span className="text-gray-600">Chưa có tài khoản? </span>
             <Link
@@ -109,7 +100,6 @@ export function Login() {
               Đăng ký ngay
             </Link>
           </div>
-{/* Demo account */}
           <div className="mt-4 p-4 bg-blue-50 rounded-lg text-sm">
             <p className="font-semibold mb-2">Tài khoản demo:</p>
             <p className="text-gray-700">
