@@ -3,13 +3,6 @@ import { useAuth } from '../../contexts/AuthContext';
 import { Button } from '../../components/ui/button';
 import { LayoutDashboard, Package, Tag, ShoppingBag, Users, BarChart3 } from 'lucide-react';
 
-const TEXT = {
-  noAccess: 'Không có quyền truy cập',
-  noAccessDesc: 'Bạn không có quyền truy cập trang quản trị',
-  goHome: 'Về trang chủ',
-  title: 'Quản trị viên',
-};
-
 const containerClass = 'container mx-auto px-4';
 export function AdminLayout() {
   const navigate = useNavigate();
@@ -20,12 +13,12 @@ export function AdminLayout() {
     return (
       <div className={`${containerClass} py-12`}>
         <div className="max-w-md mx-auto text-center">
-          <h2 className="text-2xl font-bold mb-4">{TEXT.noAccess}</h2>
+          <h2 className="text-2xl font-bold mb-4">Không có quyền truy cập</h2>
           <p className="text-gray-600 mb-6">
-            {TEXT.noAccessDesc}
+            Bạn không có quyền truy cập trang quản trị
           </p>
           <Button onClick={() => navigate('/')} className="bg-orange-500 hover:bg-orange-600">
-            {TEXT.goHome}
+            Về trang chủ
           </Button>
         </div>
       </div>
@@ -45,7 +38,7 @@ export function AdminLayout() {
       {/* Sidebar */}
       <aside className="w-64 bg-gray-50 border-r">
         <div className="p-6">
-          <h2 className="text-xl font-bold mb-6">{TEXT.title}</h2>
+          <h2 className="text-xl font-bold mb-6">Quản trị viên</h2>
           <nav className="space-y-2">
             {menuItems.map(item => {
               const Icon = item.icon;
