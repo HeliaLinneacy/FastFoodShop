@@ -39,14 +39,14 @@ export function AdminOrders() {
   }, [updateOrder, selectedOrder]);
 
   return (
-    <div className={`${containerClass} py-8`}>
-      <h1 className="text-3xl font-bold mb-6">{TEXT.title}</h1>
+    <div>
+      <h1 className="text-3xl font-bold mb-6">Quản lý đơn hàng</h1>
 
       {/* Filter */}
       <div className="mb-6 max-w-xs">
         <Select value={filterStatus} onValueChange={setFilterStatus}>
           <SelectTrigger>
-            <SelectValue placeholder={TEXT.filterPlaceholder} />
+            <SelectValue placeholder="Lọc theo trạng thái" />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="all">Tất cả đơn hàng</SelectItem>
