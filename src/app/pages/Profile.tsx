@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { Button } from '../components/ui/button';
@@ -31,33 +31,11 @@ export function Profile() {
     address: currentUser?.address || '',
   });
 
-  // ===== HANDLERS =====
-  const handleChange = useCallback((field: string, value: string) => {
-    setFormData((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
-  }, []);
-
-  const handleSubmit = useCallback(
-    (e: React.FormEvent) => {
+   const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
-
-      if (!currentUser) return;
-
       updateProfile(currentUser.id, formData);
       toast.success('Cập nhật hồ sơ thành công!');
-    },
-    [currentUser, formData, updateProfile]
-  );
-
-  const goLogin = useCallback(() => navigate('/login'), [navigate]);
-  const goBack = useCallback(() => navigate(-1), [navigate]);
-
-  const formatDate = useCallback(
-    (date: string) => new Date(date).toLocaleDateString('vi-VN'),
-    []
-  );
+    };
 
   // ===== NOT LOGIN =====
   if (!currentUser) {
