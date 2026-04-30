@@ -5,7 +5,7 @@ import { Button } from '../components/ui/button';
 import { ArrowRight, Package } from 'lucide-react';
 
 export function Home() {
-  const { products = [], categories = [] } = useData();
+  const { products, categories } = useData();
   const featuredProducts = [...products]
     .sort((a, b) => b.rating - a.rating)
     .slice(0, 8);
