@@ -53,12 +53,7 @@ export function Login() {
                 placeholder="your@email.com"
                 autoComplete="email"
                 value={formData.email}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    email: e.target.value,
-                  })
-                }
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 required
               />
             </div>
@@ -71,12 +66,7 @@ export function Login() {
                 placeholder="••••••••"
                 autoComplete="current-password"
                 value={formData.password}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    password: e.target.value,
-                  })
-                }
+                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 required
               />
             </div>
