@@ -7,19 +7,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Button } from '../components/ui/button';
 import { Search, SlidersHorizontal } from 'lucide-react';
 
-const TEXT = {
-  title: "Sản phẩm",
-  searchPlaceholder: "Tìm kiếm sản phẩm...",
-  allCategory: "Tất cả danh mục",
-  sortName: "Tên A-Z",
-  sortPriceAsc: "Giá thấp đến cao",
-  sortPriceDesc: "Giá cao đến thấp",
-  sortRating: "Đánh giá cao nhất",
-  sortSold: "Bán chạy nhất",
-  result: "Tìm thấy",
-  noResult: "Không tìm thấy sản phẩm nào",
-};
-
 const containerClass = "container mx-auto px-4";
 export function ProductList() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -83,7 +70,7 @@ export function ProductList() {
 
   return (
     <div className={`${containerClass} py-8`}>
-      <h1 className="text-3xl font-bold mb-8">{TEXT.title}</h1>
+      <h1 className="text-3xl font-bold mb-8">Sản phẩm</h1>
 
       {/* Filters */}
       <div className="bg-white rounded-lg border p-4 mb-6">
@@ -92,7 +79,7 @@ export function ProductList() {
           <div className="md:col-span-2 relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
             <Input
-              placeholder={TEXT.searchPlaceholder}
+              placeholder={Tìm kiếm sản phẩm...}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-10"
@@ -105,7 +92,7 @@ export function ProductList() {
               <SelectValue placeholder="Danh mục" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">{TEXT.allCategory}</SelectItem>
+              <SelectItem value="all">Tất cả danh mục</SelectItem>
               {categories.length > 0 ? categories.map((cat) => (
                 <SelectItem key={cat.id} value={cat.id}>
                   {cat.name}
@@ -119,11 +106,11 @@ export function ProductList() {
               <SelectValue placeholder="Sắp xếp" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="name">{TEXT.sortName}</SelectItem>
-              <SelectItem value="price-asc">{TEXT.sortPriceAsc}</SelectItem>
-              <SelectItem value="price-desc">{TEXT.sortPriceDesc}</SelectItem>
-              <SelectItem value="rating">{TEXT.sortRating}</SelectItem>
-              <SelectItem value="sold">{TEXT.sortSold}</SelectItem>
+              <SelectItem value="name">Tên A-Z</SelectItem>
+              <SelectItem value="price-asc">Giá thấp đến cao</SelectItem>
+              <SelectItem value="price-desc">Giá cao đến thấp</SelectItem>
+              <SelectItem value="rating">Đánh giá cao nhất</SelectItem>
+              <SelectItem value="sold">Bán chạy nhất</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -143,7 +130,7 @@ export function ProductList() {
         </div>
       ) : (
         <div className="text-center py-12">
-          <p className="text-gray-500">{TEXT.noResult}</p>
+          <p className="text-gray-500">Không tìm thấy sản phẩm nào</p>
         </div>
       )}
     </div>
