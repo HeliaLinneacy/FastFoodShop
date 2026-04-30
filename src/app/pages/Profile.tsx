@@ -30,7 +30,7 @@ export function Profile() {
         <div className="max-w-md mx-auto text-center">
           <h2 className="text-2xl font-bold mb-4">Vui lòng đăng nhập</h2>
           <Button
-            onClick={goLogin}
+            <Button onClick={() => navigate('/login')}>
             className="bg-orange-500 hover:bg-orange-600"
           >
             Đăng nhập
@@ -119,7 +119,7 @@ export function Profile() {
                 <Button
                   type="button"
                   variant="outline"
-                  onClick={goBack}
+                  onClick={() => navigate(-1)}
                 >
                   Hủy
                 </Button>
