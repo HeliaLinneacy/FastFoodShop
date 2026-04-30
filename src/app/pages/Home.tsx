@@ -6,14 +6,9 @@ import { ArrowRight, Package } from 'lucide-react';
 
 export function Home() {
   const { products = [], categories = [] } = useData();
-  const FEATURED_LIMIT = 8;
-
-  // Get featured products (top rated)
-  const featuredProducts = useMemo(() => {
-  return [...products]
+  const featuredProducts = [...products]
     .sort((a, b) => b.rating - a.rating)
     .slice(0, 8);
-}, [products]);
 
   return (
     <div className="min-h-screen">
