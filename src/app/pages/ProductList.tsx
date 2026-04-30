@@ -1,5 +1,4 @@
 import { useState, useMemo, useCallback } from 'react';
-import { useSearchParams } from 'react-router-dom';
 import { useSearchParams } from 'react-router';
 import { useData } from '../contexts/DataContext';
 import { ProductCard } from '../components/ProductCard';
