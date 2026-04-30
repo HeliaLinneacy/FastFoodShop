@@ -8,18 +8,6 @@ export function Home() {
   const { products = [], categories = [] } = useData();
   const FEATURED_LIMIT = 8;
 
-const TEXT = {
-  title: "Chào mừng đến với SnackShop",
-  subtitle: "Hàng ngàn sản phẩm đồ ăn vặt chất lượng cao, giao hàng nhanh chóng",
-  explore: "Khám phá ngay",
-  categories: "Danh mục sản phẩm",
-  featured: "Sản phẩm nổi bật",
-  viewAll: "Xem tất cả",
-};
-
-const containerClass = "container mx-auto px-4";
-if (!products || !categories) return null;
-
   // Get featured products (top rated)
   const featuredProducts = useMemo(() => {
   return [...products]
