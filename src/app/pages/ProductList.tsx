@@ -9,7 +9,7 @@ import { Search, SlidersHorizontal } from 'lucide-react';
 
 export function ProductList() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const { products = [], categories = [] } = useData();
+  const { products, categories } = useData();
   
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState(
