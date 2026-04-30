@@ -23,30 +23,25 @@ export function Register() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (formData.password !== formData.confirmPassword) {
+      toast.error('Mật khẩu xác nhận không khớp');
+      return;
+    }
     
-  const validateForm = () => {
-  if (formData.password !== formData.confirmPassword) {
-    toast.error('Mật khẩu xác nhận không khớp');
-    return false;
-  }
-
-  if (formData.password.length < 6) {
-    toast.error('Mật khẩu phải có ít nhất 6 ký tự');
-    return false;
-  }
-
-  return true;
-  };
-
+    if (formData.password.length < 6) {
+      toast.error('Mật khẩu phải có ít nhất 6 ký tự');
+      return;
+    }
+    
     const { confirmPassword, ...userData } = formData;
     const success = register(userData);
     
-    if (!success) {
-    return toast.error('Email đã được sử dụng');
-    }
-    
-    toast.success('Đăng ký thành công!');
-    navigate('/');
+    if (success) {
+      toast.success('Đăng ký thành công!');
+      navigate('/');
+    } else {
+      toast.error('Email đã được sử dụng');
+    }  
   };
 
   return (
