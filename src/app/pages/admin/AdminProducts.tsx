@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react';
+import { useState } from 'react';
 import { useData } from '../../contexts/DataContext';
 import { Button } from '../../components/ui/button';
 import { Card, CardContent } from '../../components/ui/card';
@@ -23,12 +23,7 @@ export function AdminProducts() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
-  const TEXT = {
-    title: 'Quản lý sản phẩm',
-    add: 'Thêm sản phẩm',
-    search: 'Tìm kiếm sản phẩm...',
-    noData: 'Không có sản phẩm',
-  };
+  
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -49,12 +44,6 @@ export function AdminProducts() {
     });
     setEditingProduct(null);
   };
-  const handleChange = useCallback((field: string, value: string) => {
-    setFormData((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
-  }, []);
   
   const handleEdit = (product: Product) => {
   setEditingProduct(product);
@@ -102,14 +91,10 @@ export function AdminProducts() {
     }
   }, [deleteProduct]);
 
-  const filteredProducts = useMemo(() => {
-    if (!products.length) return [];
-  
-    return products.filter((p) =>
-      p.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  }, [products, searchQuery]);
-  const formatPrice = useCallback((price: number) => {
+  const filteredProducts = products.filter(p =>
+    p.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+  const formatPrice = (price: number) => {
     return new Intl.NumberFormat('vi-VN', {
       style: 'currency',
       currency: 'VND',
