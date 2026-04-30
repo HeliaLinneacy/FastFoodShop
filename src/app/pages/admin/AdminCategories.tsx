@@ -22,12 +22,11 @@ export function AdminCategories() {
     slug: '',
   });
 
-  const resetForm = useCallback(() => {
+  const resetForm = () => {
     setFormData({ name: '', description: '', slug: '' });
     setEditingCategory(null);
   };
-
-  const handleEdit = useCallback((category: Category) => {
+  const handleEdit = (category: Category) => {
     setEditingCategory(category);
     setFormData({
       name: category.name,
@@ -37,7 +36,7 @@ export function AdminCategories() {
     setIsDialogOpen(true);
   };
 
-  const handleSubmit = useCallback((e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (editingCategory) {
@@ -52,12 +51,13 @@ export function AdminCategories() {
     resetForm();
   };
 
-  const handleDelete = useCallback((id: string, name: string) => {
+  const handleDelete = (id: string, name: string) => {
     const hasProducts = products.some(p => p.categoryId === id);
     if (hasProducts) {
       toast.error('Không thể xóa danh mục có sản phẩm');
       return;
     }
+
     if (confirm(`Bạn có chắc muốn xóa danh mục "${name}"?`)) {
       deleteCategory(id);
       toast.success('Đã xóa danh mục');
