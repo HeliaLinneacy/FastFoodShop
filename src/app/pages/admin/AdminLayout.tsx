@@ -1,5 +1,4 @@
-import { Link, Outlet, useNavigate, useLocation } from 'react-router-dom';
-import { useMemo, useCallback } from 'react';
+import { Link, Outlet, useNavigate, useLocation } from 'react-router';
 import { useAuth } from '../../contexts/AuthContext';
 import { Button } from '../../components/ui/button';
 import { LayoutDashboard, Package, Tag, ShoppingBag, Users, BarChart3 } from 'lucide-react';
