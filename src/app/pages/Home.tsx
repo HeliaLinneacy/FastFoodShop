@@ -17,14 +17,14 @@ export function Home() {
         <div className="container mx-auto px-4">
           <div className="max-w-2xl">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              {TEXT.title}
+              Chào mừng đến với SnackShop
             </h1>
             <p className="text-lg mb-8 text-orange-50">
-              {TEXT.subtitle}
+              Hàng ngàn sản phẩm đồ ăn vặt chất lượng cao, giao hàng nhanh chóng
             </p>
             <Link to="/products">
               <Button size="lg" variant="secondary" className="bg-white text-orange-600 hover:bg-orange-50">
-                {TEXT.explore}
+                Khám phá ngay
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
