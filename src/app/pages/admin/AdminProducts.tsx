@@ -55,19 +55,19 @@ export function AdminProducts() {
       [field]: value,
     }));
   }, []);
-  const handleSubmit = useCallback((e: React.FormEvent) => {
-    setEditingProduct(product);
-    setFormData({
-      name: product.name,
-      description: product.description,
-      price: product.price.toString(),
-      categoryId: product.categoryId,
-      image: product.image,
-      stock: product.stock.toString(),
-    });
-    setIsDialogOpen(true);
-  }, [formData, editingProduct]);
-
+  
+  const handleEdit = (product: Product) => {
+  setEditingProduct(product);
+  setFormData({
+    name: product.name,
+    description: product.description,
+    price: product.price.toString(),
+    categoryId: product.categoryId,
+    image: product.image,
+    stock: product.stock.toString(),
+  });
+  setIsDialogOpen(true);
+};
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -95,7 +95,7 @@ export function AdminProducts() {
     resetForm();
   };
 
-  const handleDelete = useCallback((id: string, name: string)) => {
+  const handleDelete = (id: string, name: string) => {
     if (confirm(`Bạn có chắc muốn xóa sản phẩm "${name}"?`)) {
       deleteProduct(id);
       toast.success('Đã xóa sản phẩm');
