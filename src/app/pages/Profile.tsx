@@ -26,7 +26,7 @@ export function Profile() {
   // ===== NOT LOGIN =====
   if (!currentUser) {
     return (
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-12">
         <div className="max-w-md mx-auto text-center">
           <h2 className="text-2xl font-bold mb-4">Vui lòng đăng nhập</h2>
           <Button
@@ -46,7 +46,7 @@ export function Profile() {
   };
 
   return (
-    <div className={`${containerClass} py-8`}>
+    <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-8">Hồ sơ của tôi</h1>
 
       <div className="max-w-2xl">
@@ -145,7 +145,7 @@ export function Profile() {
             <div className="flex justify-between">
               <span className="text-gray-600">Ngày tạo:</span>
               <span className="font-medium">
-                {formatDate(currentUser.createdAt)}
+                {new Date(currentUser.createdAt).toLocaleDateString('vi-VN')}
               </span>
             </div>
           </CardContent>
