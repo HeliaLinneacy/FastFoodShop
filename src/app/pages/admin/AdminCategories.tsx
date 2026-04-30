@@ -12,25 +12,8 @@ import { Category } from '../../types';
 import { toast } from 'sonner';
 
 export function AdminCategories() {
-  const { 
-  categories = [], 
-  products = [], 
-  addCategory, 
-  updateCategory, 
-  deleteCategory 
-} = useData();
+  const { categories, products, addCategory, updateCategory, deleteCategory } = useData();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const TEXT = {
-  title: "Quản lý danh mục",
-  add: "Thêm danh mục",
-  edit: "Chỉnh sửa danh mục",
-  create: "Thêm danh mục mới",
-  update: "Cập nhật",
-  createBtn: "Thêm mới",
-  cancel: "Hủy",
-  deleteError: "Không thể xóa danh mục có sản phẩm",
-  deleteSuccess: "Đã xóa danh mục",
-};
   const [editingCategory, setEditingCategory] = useState<Category | null>(null);
 
   const [formData, setFormData] = useState({
@@ -93,7 +76,7 @@ export function AdminCategories() {
           className="bg-orange-500 hover:bg-orange-600"
         >
           <Plus className="mr-2 h-4 w-4" />
-          {TEXT.add}
+          Thêm danh mục
         </Button>
       </div>
 
