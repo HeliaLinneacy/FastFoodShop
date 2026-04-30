@@ -52,11 +52,11 @@ const reviews = useMemo(() => {
 }, [product, getReviewsByProductId]);
   if (!product) {
     return (
-      <div className={`${containerClass} py-12 text-center`}>
+      <div className="container mx-auto px-4 py-12 text-center">
         <p className="text-gray-500">{TEXT.notFound}</p>
-        <Button onClick={goProducts} className="mt-4">
-          {TEXT.back}
-        </Button>
+          <Button onClick={() => navigate('/products')} className="mt-4">
+            {TEXT.back}
+          </Button>
       </div>
     );
   }
@@ -104,7 +104,7 @@ const reviews = useMemo(() => {
     <div className={`${containerClass} py-8`}>
       <Button
         variant="ghost"
-        onClick={goBack}
+        onClick={() => navigate(-1)}
         className="mb-6"
       >
         <ArrowLeft className="mr-2 h-4 w-4" />
