@@ -26,7 +26,7 @@ export function Profile() {
   // ===== NOT LOGIN =====
   if (!currentUser) {
     return (
-      <div className={`${containerClass} py-12`}>
+      <div className="container mx-auto px-4 py-8">
         <div className="max-w-md mx-auto text-center">
           <h2 className="text-2xl font-bold mb-4">Vui lòng đăng nhập</h2>
           <Button
