@@ -79,9 +79,7 @@ export function Profile() {
                 <Input
                   id="fullName"
                   value={formData.fullName}
-                  onChange={(e) =>
-                    handleChange('fullName', e.target.value)
-                  }
+                  onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                   required
                 />
               </div>
@@ -93,9 +91,7 @@ export function Profile() {
                   id="phone"
                   type="tel"
                   value={formData.phone}
-                  onChange={(e) =>
-                    handleChange('phone', e.target.value)
-                  }
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   required
                 />
               </div>
@@ -106,9 +102,7 @@ export function Profile() {
                 <Input
                   id="address"
                   value={formData.address}
-                  onChange={(e) =>
-                    handleChange('address', e.target.value)
-                  }
+                  onChange={(e) => setFormData({ ...formData, address: e.target.value })}
                   required
                 />
               </div>
