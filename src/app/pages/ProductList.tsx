@@ -21,16 +21,13 @@ export function ProductList() {
   const filteredProducts = useMemo(() => {
     if (!products.length) return [];
 
-  const query = searchQuery.toLowerCase();
-
   let filtered = products;
 
-  if (query) {
-    filtered = products.filter((p) => {
-      const name = p.name.toLowerCase();
-      const desc = p.description.toLowerCase();
-      return name.includes(query) || desc.includes(query);
-    });
+  if (searchQuery) {
+    filtered = filtered.filter(p =>
+      p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      p.description.toLowerCase().includes(searchQuery.toLowerCase())
+    );
   }
 
   if (selectedCategory !== 'all') {
