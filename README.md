@@ -267,11 +267,12 @@ python manage.py populate_data        # Load dữ liệu mẫu
 python manage.py runserver            # Chạy server
 python manage.py shell                # Vào Python shell
 ```
-Nếu bạn đã hoàn thành các bước trên và muốn mở lại hãy dùng lần lượt các lệnh sau:
+```Nếu bạn đã hoàn thành các bước trên và muốn mở lại hãy dùng lần lượt các lệnh sau:
+
 cd D:\webdoan\django_project ( Thay bằng đường dẫn của bạn )
 venv\Scripts\activate
 python manage.py runserver
-
+```
 ---
 
 ## 🌐 Các URL Chính
