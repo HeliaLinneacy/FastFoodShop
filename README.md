@@ -319,3 +319,8 @@ python manage.py shell                # Vào Python shell
 http://127.0.0.1:8000/admin/  | Admin
 ---
   
+
+  Theo thứ tự: 
+  cd D:\webdoan\django_project
+  venv\Scripts\activate
+  python manage.py runserver

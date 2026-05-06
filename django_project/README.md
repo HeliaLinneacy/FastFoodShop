@@ -462,3 +462,8 @@ This project is part of a portfolio and is available for educational purposes.
 
 **Version**: 1.0.0  
 **Last Updated**: March 2024
+
+
+cd D:\webdoan\django_project
+venv\Scripts\activate
+python manage.py runserver
