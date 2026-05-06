@@ -24,7 +24,7 @@ export function AdminLayout() {
     );
   }
 
-  const menuItems = [
+  const menuItems => [
     { path: '/admin', label: 'Dashboard', icon: LayoutDashboard },
     { path: '/admin/products', label: 'Sản phẩm', icon: Package },
     { path: '/admin/categories', label: 'Danh mục', icon: Tag },
@@ -32,7 +32,6 @@ export function AdminLayout() {
     { path: '/admin/users', label: 'Người dùng', icon: Users },
     { path: '/admin/statistics', label: 'Thống kê', icon: BarChart3 },
   ];
-
   return (
     <div className="flex min-h-[calc(100vh-4rem)]">
       {/* Sidebar */}

@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { useSearchParams } from 'react-router';
 import { useData } from '../contexts/DataContext';
 import { ProductCard } from '../components/ProductCard';
@@ -19,38 +19,35 @@ export function ProductList() {
 
   // Filter and sort products
   const filteredProducts = useMemo(() => {
-    let filtered = products;
+    if (!products.length) return [];
 
-    // Filter by search query
-    if (searchQuery) {
-      filtered = filtered.filter(p =>
-        p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        p.description.toLowerCase().includes(searchQuery.toLowerCase())
-      );
+  let filtered = products;
+
+  if (searchQuery) {
+    filtered = filtered.filter(p =>
+      p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      p.description.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  }
+
+  if (selectedCategory !== 'all') {
+    filtered = filtered.filter((p) => p.categoryId === selectedCategory);
+  }
+
+  return [...filtered].sort((a, b) => {
+    switch (sortBy) {
+      case 'price-asc':
+        return a.price - b.price;
+      case 'price-desc':
+        return b.price - a.price;
+      case 'rating':
+        return b.rating - a.rating;
+      case 'sold':
+        return b.sold - a.sold;
+      default:
+        return a.name.localeCompare(b.name);
     }
-
-    // Filter by category
-    if (selectedCategory !== 'all') {
-      filtered = filtered.filter(p => p.categoryId === selectedCategory);
-    }
-
-    // Sort
-    const sorted = [...filtered].sort((a, b) => {
-      switch (sortBy) {
-        case 'price-asc':
-          return a.price - b.price;
-        case 'price-desc':
-          return b.price - a.price;
-        case 'rating':
-          return b.rating - a.rating;
-        case 'sold':
-          return b.sold - a.sold;
-        default:
-          return a.name.localeCompare(b.name);
-      }
-    });
-
-    return sorted;
+  });
   }, [products, searchQuery, selectedCategory, sortBy]);
 
   const handleCategoryChange = (value: string) => {
@@ -74,7 +71,7 @@ export function ProductList() {
           <div className="md:col-span-2 relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
             <Input
-              placeholder="Tìm kiếm sản phẩm..."
+              placeholder={Tìm kiếm sản phẩm...}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-10"
@@ -88,14 +85,13 @@ export function ProductList() {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">Tất cả danh mục</SelectItem>
-              {categories.map(cat => (
+              {categories.length > 0 ? categories.map((cat) => (
                 <SelectItem key={cat.id} value={cat.id}>
                   {cat.name}
                 </SelectItem>
-              ))}
+              )) : null}
             </SelectContent>
           </Select>
-
           {/* Sort */}
           <Select value={sortBy} onValueChange={setSortBy}>
             <SelectTrigger>
@@ -114,14 +110,14 @@ export function ProductList() {
 
       {/* Results */}
       <div className="mb-4 text-gray-600">
-        Tìm thấy {filteredProducts.length} sản phẩm
+        {TEXT.result} {filteredProducts.length} sản phẩm
       </div>
 
       {/* Products Grid */}
       {filteredProducts.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {filteredProducts.map(product => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard key={product.id ?? product.name} product={product} />
           ))}
         </div>
       ) : (

@@ -6,8 +6,6 @@ import { ArrowRight, Package } from 'lucide-react';
 
 export function Home() {
   const { products, categories } = useData();
-
-  // Get featured products (top rated)
   const featuredProducts = [...products]
     .sort((a, b) => b.rating - a.rating)
     .slice(0, 8);
@@ -37,7 +35,7 @@ export function Home() {
       {/* Categories */}
       <section className="py-12 bg-gray-50">
         <div className="container mx-auto px-4">
-          <h2 className="text-2xl font-bold mb-6">Danh mục sản phẩm</h2>
+          <h2 className="text-2xl font-bold mb-6">{TEXT.categories}</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {categories.map(category => (
               <Link
@@ -59,10 +57,10 @@ export function Home() {
       <section className="py-12">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold">Sản phẩm nổi bật</h2>
+            <h2 className="text-2xl font-bold">{TEXT.featured}</h2>
             <Link to="/products">
               <Button variant="outline">
-                Xem tất cả
+                {TEXT.viewAll}
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>

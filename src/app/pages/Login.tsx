@@ -7,21 +7,18 @@ import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 import { Package } from 'lucide-react';
 import { toast } from 'sonner';
-
 export function Login() {
   const navigate = useNavigate();
   const { login } = useAuth();
-  
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     const success = login(formData.email, formData.password);
-    
+
     if (success) {
       toast.success('Đăng nhập thành công!');
       navigate('/');
@@ -29,10 +26,10 @@ export function Login() {
       toast.error('Email hoặc mật khẩu không đúng');
     }
   };
-
-  return (
+ return (
     <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center bg-gray-50 px-4 py-12">
       <Card className="w-full max-w-md">
+        
         <CardHeader className="space-y-4">
           <div className="flex justify-center">
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-orange-500">
@@ -44,9 +41,10 @@ export function Login() {
             <p className="text-gray-600 mt-2">Chào mừng bạn quay lại SnackShop</p>
           </div>
         </CardHeader>
-        
+
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
+            
             <div>
               <Label htmlFor="email">Email</Label>
               <Input
@@ -70,7 +68,6 @@ export function Login() {
                 required
               />
             </div>
-
             <Button
               type="submit"
               className="w-full bg-orange-500 hover:bg-orange-600"
@@ -86,11 +83,14 @@ export function Login() {
               Đăng ký ngay
             </Link>
           </div>
-
           <div className="mt-4 p-4 bg-blue-50 rounded-lg text-sm">
             <p className="font-semibold mb-2">Tài khoản demo:</p>
-            <p className="text-gray-700">Admin: admin@snackshop.com / admin123</p>
-            <p className="text-gray-700">User: user@example.com / user123</p>
+            <p className="text-gray-700">
+              Admin: admin@snackshop.com / admin123
+            </p>
+            <p className="text-gray-700">
+              User: user@example.com / user123
+            </p>
           </div>
         </CardContent>
       </Card>

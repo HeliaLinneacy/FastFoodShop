@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardHeader } from '../components/ui/card';
@@ -17,19 +17,28 @@ export function Profile() {
     address: currentUser?.address || '',
   });
 
+   const handleSubmit = (e: React.FormEvent) => {
+      e.preventDefault();
+      updateProfile(currentUser.id, formData);
+      toast.success('Cập nhật hồ sơ thành công!');
+    };
+
+  // ===== NOT LOGIN =====
   if (!currentUser) {
     return (
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-md mx-auto text-center">
           <h2 className="text-2xl font-bold mb-4">Vui lòng đăng nhập</h2>
-          <Button onClick={() => navigate('/login')} className="bg-orange-500 hover:bg-orange-600">
+          <Button
+            <Button onClick={() => navigate('/login')}>
+            className="bg-orange-500 hover:bg-orange-600"
+          >
             Đăng nhập
           </Button>
         </div>
       </div>
     );
   }
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     updateProfile(currentUser.id, formData);
@@ -41,24 +50,30 @@ export function Profile() {
       <h1 className="text-3xl font-bold mb-8">Hồ sơ của tôi</h1>
 
       <div className="max-w-2xl">
+        {/* PERSONAL INFO */}
         <Card>
           <CardHeader>
             <h3 className="text-lg font-semibold">Thông tin cá nhân</h3>
           </CardHeader>
+
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
+              {/* EMAIL */}
               <div>
                 <Label htmlFor="email">Email</Label>
                 <Input
                   id="email"
                   type="email"
-                  value={currentUser.email}
+                  value={currentUser.email || ''}
                   disabled
                   className="bg-gray-50"
                 />
-                <p className="text-xs text-gray-500 mt-1">Email không thể thay đổi</p>
+                <p className="text-xs text-gray-500 mt-1">
+                  Email không thể thay đổi
+                </p>
               </div>
 
+              {/* FULL NAME */}
               <div>
                 <Label htmlFor="fullName">Họ và tên</Label>
                 <Input
@@ -69,6 +84,7 @@ export function Profile() {
                 />
               </div>
 
+              {/* PHONE */}
               <div>
                 <Label htmlFor="phone">Số điện thoại</Label>
                 <Input
@@ -80,6 +96,7 @@ export function Profile() {
                 />
               </div>
 
+              {/* ADDRESS */}
               <div>
                 <Label htmlFor="address">Địa chỉ</Label>
                 <Input
@@ -90,6 +107,7 @@ export function Profile() {
                 />
               </div>
 
+              {/* ACTIONS */}
               <div className="flex gap-4">
                 <Button
                   type="submit"
@@ -97,6 +115,7 @@ export function Profile() {
                 >
                   Cập nhật
                 </Button>
+
                 <Button
                   type="button"
                   variant="outline"
@@ -109,15 +128,20 @@ export function Profile() {
           </CardContent>
         </Card>
 
+        {/* ACCOUNT INFO */}
         <Card className="mt-6">
           <CardHeader>
             <h3 className="text-lg font-semibold">Thông tin tài khoản</h3>
           </CardHeader>
+
           <CardContent className="space-y-2 text-sm">
             <div className="flex justify-between">
               <span className="text-gray-600">Vai trò:</span>
-              <span className="font-medium capitalize">{currentUser.role}</span>
+              <span className="font-medium capitalize">
+                {currentUser.role}
+              </span>
             </div>
+
             <div className="flex justify-between">
               <span className="text-gray-600">Ngày tạo:</span>
               <span className="font-medium">

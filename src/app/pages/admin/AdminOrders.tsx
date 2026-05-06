@@ -18,7 +18,7 @@ export function AdminOrders() {
   const filteredOrders = orders
     .filter(o => filterStatus === 'all' || o.status === filterStatus)
     .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-
+  
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('vi-VN', {
       style: 'currency',
@@ -36,7 +36,7 @@ export function AdminOrders() {
     if (selectedOrder?.id === orderId) {
       setSelectedOrder({ ...selectedOrder, status: newStatus });
     }
-  };
+  }, [updateOrder, selectedOrder]);
 
   return (
     <div>

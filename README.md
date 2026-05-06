@@ -14,7 +14,7 @@ Trước khi bắt đầu, bạn cần cài đặt những phần mềm sau:
 #### 1️⃣ Cài Python 3.10+
 
 1. Truy cập: https://www.python.org/downloads/
-2. Download **Python 3.10 trở lên** (phiên bản mới nhất)
+2. Download **Python 3.12 trở xuống** 
 3. Chạy file tải về
 4. **QUAN TRỌNG:** Tích chọn ✓ "Add Python to PATH" **ĐẦU TIÊN RỒI** Click "Install Now"
 5. Chờ hoàn thành cài đặt
@@ -25,22 +25,6 @@ Trước khi bắt đầu, bạn cần cài đặt những phần mềm sau:
    Nếu hiện phiên bản Python (ví dụ: Python 3.14.2) là OK 
 
 #### 2️⃣ Cài MySQL Server 8.0+
-
-1. Truy cập: https://dev.mysql.com/downloads/mysql/
-2. Download **MySQL Community Server** (phiên bản ổn định, không cần SQL Workbench)
-3. Chạy installer và làm theo hướng dẫn:
-   - Chọn "MySQL Server"
-   - Chọn "MySQL as a Windows Service" (để chạy tự động khi khởi động PC)
-   - Khi hỏi port, dùng mặc định **3306**
-   - **Khi hỏi password Root**, nhập password dễ nhớ (ví dụ: `password123`)
-   - **GHI NHỚ** password này, sẽ dùng sau
-4. Chợ cài xong
-5. Mở PowerShell/CMD và kiểm tra:
-   ```
-   mysql -u root -p
-   ```
-   Nhập password root vừa set. Nếu vào được dòng `mysql>` là OK . Gõ `exit` để thoát.
-
 ---
 
 ### BƯỚC 1: Copy Mã Nguồn
@@ -114,24 +98,6 @@ pip install -r requirements.txt --no-cache-dir
 ---
 
 ### BƯỚC 7: Tạo Database trong MySQL
-
-Mở PowerShell/CMD (vẫn ở thư mục `django_project`) và gõ:
-
-```powershell
-mysql -u root -p
-```
-
-**Nhập password root** mà bạn set khi cài MySQL.
-
-Bạn sẽ vào dòng `mysql>`. Gõ lệnh này:
-
-```sql
-CREATE DATABASE snackshop CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-```
-
-Rồi gõ `exit` để thoát.
-
----
 
 ### BƯỚC 8: Tạo File `.env`
 
@@ -301,7 +267,12 @@ python manage.py populate_data        # Load dữ liệu mẫu
 python manage.py runserver            # Chạy server
 python manage.py shell                # Vào Python shell
 ```
+```Nếu bạn đã hoàn thành các bước trên và muốn mở lại hãy dùng lần lượt các lệnh sau:
 
+cd D:\webdoan\django_project ( Thay bằng đường dẫn của bạn )
+venv\Scripts\activate
+python manage.py runserver
+```
 ---
 
 ## 🌐 Các URL Chính
@@ -319,8 +290,3 @@ python manage.py shell                # Vào Python shell
 http://127.0.0.1:8000/admin/  | Admin
 ---
   
-
-  Theo thứ tự: 
-  cd D:\webdoan\django_project
-  venv\Scripts\activate
-  python manage.py runserver

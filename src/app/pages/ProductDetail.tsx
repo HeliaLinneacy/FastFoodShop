@@ -19,18 +19,23 @@ export function ProductDetail() {
   const [quantity, setQuantity] = useState(1);
   const [rating, setRating] = useState(5);
   const [comment, setComment] = useState('');
-
   const product = getProductById(id!);
-  const category = product ? getCategoryById(product.categoryId) : null;
-  const reviews = product ? getReviewsByProductId(product.id) : [];
+const category = useMemo(() => {
+  if (!product) return null;
+  return getCategoryById(product.categoryId);
+}, [product, getCategoryById]);
 
+const reviews = useMemo(() => {
+  if (!product) return [];
+  return getReviewsByProductId(product.id);
+}, [product, getReviewsByProductId]);
   if (!product) {
     return (
       <div className="container mx-auto px-4 py-12 text-center">
         <p className="text-gray-500">Không tìm thấy sản phẩm</p>
-        <Button onClick={() => navigate('/products')} className="mt-4">
-          Quay lại danh sách
-        </Button>
+          <Button onClick={() => navigate('/products')} className="mt-4">
+            Quay lại
+          </Button>
       </div>
     );
   }
@@ -75,7 +80,7 @@ export function ProductDetail() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className={`${containerClass} py-8`}>
       <Button
         variant="ghost"
         onClick={() => navigate(-1)}
@@ -152,7 +157,7 @@ export function ProductDetail() {
               <Button
                 variant="ghost"
                 size="icon"
-                onClick={() => setQuantity(Math.min(product.stock, quantity + 1))}
+                onClick={() => setQuantity((prev) => Math.min(product.stock, prev + 1))}
               >
                 <Plus className="h-4 w-4" />
               </Button>
@@ -184,13 +189,13 @@ export function ProductDetail() {
 
       {/* Reviews */}
       <div>
-        <h2 className="text-2xl font-bold mb-6">Đánh giá sản phẩm</h2>
+        <h2 className="text-2xl font-bold mb-6">{TEXT.reviewTitle}</h2>
 
         {/* Add Review Form */}
         {currentUser && (
           <Card className="mb-6">
             <CardContent className="p-6">
-              <h3 className="font-semibold mb-4">Viết đánh giá của bạn</h3>
+              <h3 className="font-semibold mb-4">{TEXT.writeReview}</h3>
               <form onSubmit={handleSubmitReview}>
                 <div className="mb-4">
                   <label className="block text-sm font-medium mb-2">

@@ -26,7 +26,6 @@ export function AdminCategories() {
     setFormData({ name: '', description: '', slug: '' });
     setEditingCategory(null);
   };
-
   const handleEdit = (category: Category) => {
     setEditingCategory(category);
     setFormData({
@@ -94,10 +93,10 @@ export function AdminCategories() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {categories.map(category => {
+             {categories.map(category) => {
                 const productCount = products.filter(p => p.categoryId === category.id).length;
                 return (
-                  <TableRow key={category.id}>
+                  <TableRow key={category.id ?? category.slug}>
                     <TableCell className="font-medium">{category.name}</TableCell>
                     <TableCell>{category.description}</TableCell>
                     <TableCell className="text-gray-600">{category.slug}</TableCell>

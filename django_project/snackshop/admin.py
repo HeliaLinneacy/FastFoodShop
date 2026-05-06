@@ -3,7 +3,6 @@ from .models import (
     CustomUser, Category, Product, Review, Order, OrderItem, Cart, CartItem
 )
 
-
 # Minimal admin registration - no custom configuration
 admin.site.register(CustomUser)
 admin.site.register(Category)
@@ -38,7 +37,6 @@ class OrderAdmin(admin.ModelAdmin):
         if obj:  # Editing an existing object
             return self.readonly_fields + ('user',)
         return self.readonly_fields
-
 
 # Custom OrderItem Admin
 @admin.register(OrderItem)

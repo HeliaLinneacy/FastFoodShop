@@ -17,7 +17,7 @@ export function AdminProducts() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
-
+  
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -38,20 +38,19 @@ export function AdminProducts() {
     });
     setEditingProduct(null);
   };
-
+  
   const handleEdit = (product: Product) => {
-    setEditingProduct(product);
-    setFormData({
-      name: product.name,
-      description: product.description,
-      price: product.price.toString(),
-      categoryId: product.categoryId,
-      image: product.image,
-      stock: product.stock.toString(),
-    });
-    setIsDialogOpen(true);
-  };
-
+  setEditingProduct(product);
+  setFormData({
+    name: product.name,
+    description: product.description,
+    price: product.price.toString(),
+    categoryId: product.categoryId,
+    image: product.image,
+    stock: product.stock.toString(),
+  });
+  setIsDialogOpen(true);
+};
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -84,18 +83,17 @@ export function AdminProducts() {
       deleteProduct(id);
       toast.success('Đã xóa sản phẩm');
     }
-  };
+  }, [deleteProduct]);
 
   const filteredProducts = products.filter(p =>
     p.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
-
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('vi-VN', {
       style: 'currency',
       currency: 'VND',
     }).format(price);
-  };
+  }, []);
 
   return (
     <div>
